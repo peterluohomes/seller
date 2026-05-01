@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Weekly Seller Communication — Pinnacle Listing System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1B2A4E;
+  --navy-soft: #2D3F66;
+  --navy-faint: #E8ECF3;
+  --gold: #B08D3C;
+  --gold-soft: #C9A856;
+  --gold-faint: #F7F1E1;
+  --ink: #1A1A1A;
+  --ink-soft: #555555;
+  --ink-faint: #999999;
+  --paper: #FAFAF7;
+  --card: #FFFFFF;
+  --border: #E5E5E0;
+  --green: #5F8A4E;
+  --green-faint: #EDF3E9;
+  --red: #B85450;
+  --red-faint: #FCEEED;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.app {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px 20px 80px;
+}
+
+.header { text-align: center; padding: 16px 0 28px; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+.brand { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
+.header h1 { font-family: var(--serif); font-size: 30px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; line-height: 1.2; }
+.header .sub { font-size: 14px; color: var(--ink-soft); margin-top: 6px; font-style: italic; }
+
+.listing-bar, .search-bar {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-bar { margin-bottom: 18px; }
+
+.listing-bar label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.listing-bar input {
+  flex: 1;
+  min-width: 200px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.listing-bar input:focus, .search-input:focus { outline: none; border-color: var(--gold); }
+
+.listing-bar .last-used { font-size: 12px; color: var(--ink-soft); font-style: italic; }
+
+.search-input-wrap { flex: 1; min-width: 200px; position: relative; }
+.search-input-wrap::before {
+  content: '🔍';
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  opacity: 0.5;
+}
+.search-input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 9px 12px 9px 36px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.filter-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.pill {
+  background: white;
+  color: var(--navy);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.pill.active { background: var(--navy); color: white; border-color: var(--navy); }
+.pill:hover:not(.active) { background: var(--navy-faint); }
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 28px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--navy);
+}
+
+.section-header:first-of-type { margin-top: 8px; }
+.section-header h2 { font-family: var(--serif); font-size: 20px; font-weight: 700; color: var(--navy); }
+.section-header .count {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: white;
+  background: var(--navy);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.section-desc { font-size: 13px; color: var(--ink-soft); margin-bottom: 14px; line-height: 1.5; font-style: italic; }
+
+.template {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(27, 42, 78, 0.04);
+  transition: box-shadow 0.2s ease;
+}
+.template:hover { box-shadow: 0 2px 8px rgba(27, 42, 78, 0.08); }
+
+.template-head {
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  user-select: none;
+}
+.template-head:hover { background: var(--navy-faint); }
+
+.template-num {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  margin-top: 2px;
+  min-width: 28px;
+}
+
+.template-info { flex: 1; min-width: 0; }
+.template-title { font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 4px; line-height: 1.2; }
+.template-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+.template-tags { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
+
+.tag {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: var(--navy-faint);
+  color: var(--navy);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.tag.call { background: var(--gold-faint); color: var(--gold); }
+.tag.green { background: var(--green-faint); color: var(--green); }
+.tag.red { background: var(--red-faint); color: var(--red); }
+
+.template-arrow {
+  font-size: 20px;
+  color: var(--ink-faint);
+  transition: transform 0.2s ease;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.template.expanded .template-arrow { transform: rotate(90deg); color: var(--gold); }
+
+.template-body {
+  display: none;
+  padding: 0 20px 20px;
+  border-top: 1px solid var(--border);
+  margin-top: -1px;
+}
+.template.expanded .template-body { display: block; }
+
+.block-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin: 18px 0 8px;
+}
+
+.subject-block {
+  background: var(--gold-faint);
+  border-left: 3px solid var(--gold);
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--navy);
+}
+
+.email-block, .phone-block {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  white-space: pre-wrap;
+  font-family: var(--sans);
+}
+
+.phone-block { background: #FFF9EE; border-color: #E8D9A8; }
+.email-block strong, .phone-block strong { color: var(--navy); font-weight: 700; }
+
+.field-tag {
+  background: rgba(176, 141, 60, 0.12);
+  color: var(--gold);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.copy-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  gap: 10px;
+}
+.copy-row .why { font-size: 12px; color: var(--ink-soft); font-style: italic; flex: 1; }
+
+.btn-copy {
+  background: var(--navy);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+.btn-copy:hover { background: var(--navy-soft); }
+.btn-copy.copied { background: var(--green); }
+.btn-copy.gold { background: var(--gold); }
+.btn-copy.gold:hover { background: var(--gold-soft); }
+
+.why-works {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--navy-faint);
+  border-left: 3px solid var(--navy);
+  border-radius: 4px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.why-works strong {
+  color: var(--navy);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.call-meta {
+  background: var(--gold-faint);
+  border: 1px solid #E8D9A8;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 16px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+.call-meta-item { display: flex; flex-direction: column; gap: 2px; }
+.call-meta-item .lbl {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+.call-meta-item .val { color: var(--navy); font-weight: 600; }
+
+.framework-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 14px;
+  padding: 22px 24px;
+  box-shadow: 0 1px 3px rgba(27, 42, 78, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+.framework-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--gold);
+}
+
+.framework-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 10px; }
+.framework-num {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  min-width: 36px;
+}
+.framework-title { font-family: var(--serif); font-size: 20px; font-weight: 700; color: var(--navy); flex: 1; }
+.framework-tag {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  background: var(--gold-faint);
+  padding: 4px 10px;
+  border-radius: 10px;
+  align-self: flex-start;
+  margin-top: 4px;
+}
+.framework-desc { font-size: 14px; color: var(--ink); line-height: 1.6; margin-bottom: 12px; }
+.framework-desc p { margin-bottom: 10px; }
+.framework-desc p:last-child { margin-bottom: 0; }
+.framework-example {
+  background: var(--gold-faint);
+  border-left: 3px solid var(--gold);
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--ink);
+  font-style: italic;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+.framework-takeaway {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: var(--navy-faint);
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.55;
+}
+.framework-takeaway strong {
+  color: var(--navy);
+  font-weight: 700;
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.note-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 3px rgba(27, 42, 78, 0.04);
+}
+.note-card h3 {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--navy);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.note-card h3::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+.note-card p { font-size: 14px; color: var(--ink); line-height: 1.6; margin-bottom: 8px; }
+.note-card p:last-child { margin-bottom: 0; }
+.note-card .quote {
+  background: var(--paper);
+  border-left: 3px solid var(--navy);
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--ink);
+  font-style: italic;
+  line-height: 1.55;
+  margin: 8px 0;
+}
+.note-card.warning { background: linear-gradient(to right, var(--gold-faint), var(--card)); border-color: #E8D9A8; }
+.note-card.signature {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%);
+  color: white;
+  border-color: var(--navy);
+}
+.note-card.signature h3 { color: white; }
+.note-card.signature h3::before { background: var(--gold-soft); }
+.note-card.signature p { color: rgba(255, 255, 255, 0.92); }
+.note-card.signature .quote {
+  background: rgba(0, 0, 0, 0.18);
+  border-left-color: var(--gold-soft);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.principles {
+  margin-top: 32px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+.principles h3 { font-family: var(--serif); font-size: 18px; color: var(--navy); margin-bottom: 12px; }
+.principles ul { list-style: none; }
+.principles li {
+  padding: 8px 0 8px 18px;
+  position: relative;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink);
+  border-bottom: 1px solid var(--border);
+}
+.principles li:last-child { border-bottom: none; }
+.principles li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 16px;
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+.empty-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--ink-soft);
+  background: var(--card);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  margin: 12px 0;
+}
+.empty-results h3 { font-family: var(--serif); color: var(--navy); font-size: 18px; margin-bottom: 6px; }
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(120px);
+  background: var(--navy);
+  color: white;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 6px 18px rgba(27, 42, 78, 0.35);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 200;
+}
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+@media (max-width: 560px) {
+  .app { padding: 16px 14px 80px; }
+  .header h1 { font-size: 24px; }
+  .section-header h2 { font-size: 17px; }
+  .template-head { padding: 14px 16px; gap: 10px; }
+  .template-title { font-size: 16px; }
+  .template-num { font-size: 17px; min-width: 22px; }
+  .template-body { padding: 0 16px 16px; }
+  .copy-row { flex-direction: column; align-items: stretch; }
+  .copy-row .why { order: 2; }
+  .listing-bar, .search-bar { flex-direction: column; align-items: stretch; }
+  .listing-bar input, .search-input-wrap { min-width: 0; }
+  .filter-pills { justify-content: flex-start; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div class="brand">Pinnacle Listing System</div>
+    <h1>Weekly Seller Communication</h1>
+    <div class="sub">21 templates across the full listing lifecycle</div>
+  </header>
+
+  <div class="listing-bar">
+    <label for="address">Listing</label>
+    <input type="text" id="address" placeholder="e.g., 123 Maple Street, Toronto">
+    <span class="last-used" id="lastUsed"></span>
+  </div>
+
+  <div class="search-bar">
+    <div class="search-input-wrap">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search — try 'inspection', 'offer', 'quiet', 'reduction'...">
+    </div>
+    <div class="filter-pills" id="filterPills">
+      <button class="pill active" data-filter="all">All</button>
+      <button class="pill" data-filter="email">Email Only</button>
+      <button class="pill" data-filter="call">Email + Call</button>
+    </div>
+  </div>
+
+  <div id="templateSections"></div>
+  <div class="empty-results" id="emptyResults" style="display:none;">
+    <h3>No templates match your search</h3>
+    <p style="font-size: 13px;">Try a different keyword or clear your filters</p>
+  </div>
+
+  <div class="section-header" style="margin-top: 40px;">
+    <h2>The 5-Part Framework</h2>
+    <span class="count">Why every template works</span>
+  </div>
+  <p class="section-desc">Every template above follows the same skeleton. The substance changes; the structure does not. Understanding the why behind each part is what lets you adapt confidently when a real listing throws something the templates do not anticipate.</p>
+
+  <div id="frameworkSections"></div>
+  <div id="supportingNotes"></div>
+
+  <div class="principles">
+    <h3>Universal Principles</h3>
+    <ul>
+      <li><strong>Same day every week.</strong> Sunday evening or Monday morning. Predictability earns trust.</li>
+      <li><strong>Always include the numbers.</strong> Never hide bad ones. Sellers detect padding instantly.</li>
+      <li><strong>Always synthesize feedback into a pattern.</strong> Never just forward agent comments.</li>
+      <li><strong>Always list specific actions.</strong> Sellers cannot see invisible work — name it.</li>
+      <li><strong>Always close with one human line.</strong> The numbers fade. The human moment stays.</li>
+      <li><strong>Calls should feel like they have a reason.</strong> Reserve them for moments that benefit from voice — overusing them burns out the channel.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const DB_NAME = 'PinnacleSellerComms';
+const DB_VERSION = 1;
+let db = null;
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = (e) => {
+      const d = e.target.result;
+      if (!d.objectStoreNames.contains('settings')) d.createObjectStore('settings', { keyPath: 'key' });
+    };
+    req.onsuccess = (e) => { db = e.target.result; resolve(db); };
+    req.onerror = (e) => reject(e.target.error);
+  });
+}
+
+function saveSetting(key, value) {
+  return new Promise((resolve, reject) => {
+    const r = db.transaction('settings', 'readwrite').objectStore('settings').put({ key, value });
+    r.onsuccess = () => resolve(); r.onerror = () => reject(r.error);
+  });
+}
+
+function getSetting(key) {
+  return new Promise((resolve, reject) => {
+    const r = db.transaction('settings').objectStore('settings').get(key);
+    r.onsuccess = () => resolve(r.result ? r.result.value : null);
+    r.onerror = () => reject(r.error);
+  });
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1800);
+  }).catch(() => showToast('Copy failed — try selecting manually'));
+}
+
+function escapeHtml(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function formatEmail(text) {
+  const sectionLabels = ['The numbers','What the feedback is telling us','What I am doing this week','What I am doing this week to change the trajectory','What I think is happening','My read','One last note','The numbers to date','What the cumulative feedback is telling us','The three options I want to walk through with you','Can we find 30 minutes this week\\?','The numbers since the adjustment','What this is telling us','The offer at a glance','My read on the offer','What I recommend we do','Side-by-side','My recommendation','What happens next','What we agreed','The next milestones','Open house results','What the visitors told us','What I am doing as a result','The inspection findings','What is normal vs material','My recommendation on response','The buyer.s request','What is reasonable','My recommended counter','Why I think the time is right','The options','Why I am recommending a price adjustment','Where we are','Three paths forward','What I want to acknowledge','How we close this out','What I want you to know','Why I will be away','Who to contact while I am away','When I am back','How I am thinking about it','What might help','What I think we should do','The trade-offs you should understand','How buyers typically respond','What inspectors typically find','What you can do to prepare','What happens during the inspection'];
+  const re = new RegExp('^(' + sectionLabels.join('|') + ')$', 'gm');
+  return escapeHtml(text)
+    .replace(re, '<strong>$1</strong>')
+    .replace(/\[([^\]]+)\]/g, '<span class="field-tag">[$1]</span>');
+}
+
+function formatPhone(text) {
+  return escapeHtml(text)
+    .replace(/^\[([^\]]+)\]$/gm, '<strong style="color: var(--gold);">[$1]</strong>')
+    .replace(/\[NAME\]/g, '<span class="field-tag">[NAME]</span>')
+    .replace(/\[ADDRESS\]/g, '<span class="field-tag">[ADDRESS]</span>');
+}
+
+function applyAddress(text) {
+  const addr = document.getElementById('address').value.trim();
+  if (!addr) return text;
+  return text.replace(/\[ADDRESS\]/g, addr);
+}
+
+const stages = [
+  { id: 'launch', title: 'Launch & Early Weeks', desc: 'The first 2–3 weeks. Set expectations, build credibility, manage early anxiety.' },
+  { id: 'mid', title: 'Mid-Listing & Strategy', desc: 'Weeks 3–6+. Hold rhythm, recognize inflection points, navigate price strategy.' },
+  { id: 'showings', title: 'Showings & Open Houses', desc: 'Specific events that need their own communication — not just a weekly digest.' },
+  { id: 'offers', title: 'Offer Stage', desc: 'When offers come in. High-emotion, time-compressed. The templates keep you calm.' },
+  { id: 'conditional', title: 'Conditional Period & Closing', desc: 'After acceptance through to firm sale. Inspections, conditions, and the path to close.' },
+  { id: 'operational', title: 'Operational & Boundary', desc: 'The smaller messages most agents skip — but sellers notice when they arrive.' }
+];
+
+const templates = [
+  {
+    stage: "launch",
+    num: "L1",
+    title: "Strong Launch (Week 1)",
+    desc: "Healthy showing volume (4+ showings), positive feedback, the home is performing as expected.",
+    tags: [
+      {
+        text: "Email Only",
+        cls: ""
+      },
+      {
+        text: "Week 1",
+        cls: ""
+      },
+      {
+        text: "Positive",
+        cls: "green"
+      }
+    ],
+    subject: "[ADDRESS] — Week 1 Update: Strong Start",
+    email: `Hi [NAME],
+
+A quick recap of our first week on the market — overall, we are off to a strong start.
+
+The numbers
+• Showings this week: [X]
+• Online views on Realtor.ca: [X]
+• Saves / favourites: [X]
+• New comparable listings in the area: [X]
+
+What the feedback is telling us
+The early showings are echoing what we hoped — buyers are responding well to [the kitchen / the natural light / the layout / the lot]. The most common comment so far has been [insert pattern]. That tells me our positioning is landing the way we planned.
+
+What I am doing this week
+• Reposting the listing across my Mandarin WeChat network ([X] contacts)
+• Following up personally with the [X] buyer agents who toured this past week
+• Boosting the listing's social media post over the weekend
+• Reaching out to agents who have shown comparable homes in the past 30 days
+
+My read
+We are exactly where I would want to be at the end of week 1. The showing pace and the consistency of the feedback both tell me the price is right and the home is presenting well. I expect we will see at least one serious offer-stage conversation this week.
+
+One last note
+Thank you for keeping the home so showing-ready this week — I know that is a lot of work with [the kids / the dog / your schedule]. It is paying off in the feedback.
+
+Talk soon,
+Peter`,
+    why: "Confidence is the like-earning currency in week 1. Sellers are anxious during launch — they need to feel that you are calm, in control, and that the plan is working. The acknowledgment of their effort at the end is the human moment that makes the email memorable."
+  },
+
+  {
+    stage: "launch",
+    num: "L2",
+    title: "Slow Start, No Offers Yet",
+    desc: "Decent showing volume (2–4 per week) but no offers. Feedback is mixed. The seller is starting to wonder if something is wrong.",
+    tags: [
+      {
+        text: "Email Only",
+        cls: ""
+      },
+      {
+        text: "Week 1–2",
+        cls: ""
+      },
+      {
+        text: "Steady",
+        cls: ""
+      }
+    ],
+    subject: "[ADDRESS] — Week [X] Update: Steady Activity, Reading the Room",
+    email: `Hi [NAME],
+
+Here is where we stand at the end of week [X]. The activity is steady but not yet at the offer stage — let me walk you through what I am seeing and what we are doing about it.
+
+The numbers
+• Showings this week: [X] (total to date: [X])
+• Online views: [X]
+• Saves: [X]
+• New comparable listings nearby: [X]
+• Comparable sales nearby: [X]
+
+What the feedback is telling us
+Two patterns are emerging from the showings. First, buyers are consistently responding well to [feature]. Second, the most common hesitation has been [insert pattern]. That second pattern is the one I am paying close attention to, because it tells us where buyers are getting stuck.
+
+What I am doing this week
+• Personally calling the [X] buyer agents who showed without bringing back an offer
+• Refreshing the photo sequence on Realtor.ca to lead with [feature]
+• Pushing the listing through my Mandarin network with refreshed copy
+• Watching the new comparable listings closely
+
+My read
+We are at the normal inflection point. Decent traffic without offers usually means one of three things: the price is just above where buyers are willing to commit, the photos are not pulling the right buyer, or the market is genuinely slower this month than last. I think it is mostly the third right now, but I want one more week of data before suggesting any change.
+
+One last note
+If you are starting to feel impatient — that is a normal feeling at this stage and you are not alone in it. We have time and we have a plan. I will have a clearer recommendation by next week's update.
+
+Talk soon,
+Peter`,
+    why: "The like is earned by naming the seller's anxiety before they raise it (\"if you are starting to feel impatient\"), being honest about what you do not yet know, and refusing to offer a panicked solution before you have the data. Calm consultant, not panicked salesperson."
+  },
+
+  {
+    stage: "mid",
+    num: "M1",
+    title: "Mid-Listing Steady (Weeks 4+)",
+    desc: "Listing has been on the market 4+ weeks, activity continues at a normal pace, no major changes needed. Keep the rhythm so the seller never wonders if you have moved on.",
+    tags: [
+      {
+        text: "Email Only",
+        cls: ""
+      },
+      {
+        text: "Week 4+",
+        cls: ""
+      },
+      {
+        text: "Maintenance",
+        cls: ""
+      }
+    ],
+    subject: "[ADDRESS] — Week [X] Update: Holding the Course",
+    email: `Hi [NAME],
+
+Here is where we are at the end of week [X]. Nothing dramatic to report — which in this market is a good thing. We are holding the course.
+
+The numbers
+• Showings this week: [X] (total to date: [X])
+• Online views: [X] (running [X] per week average)
+• Saves: [X]
+• New comparable listings nearby: [X]
+• Comparable sales nearby this week: [X]
+
+What the feedback is telling us
+The feedback has been consistent for [X] weeks now — buyers continue to respond well to [feature], and the most common hesitation remains [hesitation]. That consistency is actually useful information: it tells us the listing is reaching the right buyer pool.
+
+What I am doing this week
+• Continuing personal outreach to buyer agents who shop in this price range
+• Refreshing my Mandarin and English network posts so the listing stays in front of new buyers
+• Tracking comparable listings and sales for any signal worth acting on
+• [Specific action — e.g., open house, broker's open]
+
+My read
+Listings at this stage typically close in one of two ways: a buyer who saw it earlier comes back with a stronger offer, or a new buyer enters the market. Both happen. The work right now is keeping the listing visible and well-supported until one of those buyers shows up.
+
+One last note
+I know weeks like this can feel like nothing is happening — but real work is happening behind the scenes, and consistency is what eventually produces the offer. Thank you for staying patient.
+
+Talk soon,
+Peter`,
+    why: "The middle weeks are where most agents go quiet — and where most sellers start to lose confidence. The like is earned by sending the update anyway, even when there is \"nothing dramatic\" to report. The line \"consistency is what eventually produces the offer\" gives the seller a useful frame for their patience."
+  },
+
+  {
+    stage: "mid",
+    num: "M2",
+    title: "Quiet Week (Few or Zero Showings)",
+    desc: "Almost no showings this week. The update most agents skip — which is exactly when sellers lose trust. Send the email, then follow with a reassurance call.",
+    tags: [
+      {
+        text: "Email + Call",
+        cls: "call"
+      },
+      {
+        text: "Quiet Week",
+        cls: "red"
+      }
+    ],
+    callMeta: {
+      timing: "Within 24 hours",
+      length: "~5 minutes",
+      purpose: "Reassurance, not repeat"
+    },
+    subject: "[ADDRESS] — Week [X] Update: Quiet Week, Here is My Plan",
+    email: `Hi [NAME],
+
+This week was quiet. I want to address that head-on rather than dress it up, and walk you through what I am doing about it.
+
+The numbers
+• Showings this week: [0 / 1]
+• Online views: [X] (compared to [X] last week)
+• Saves: [X]
+• New comparable listings: [X]
+
+What I think is happening
+Quiet weeks happen for two reasons: market timing, or listing fatigue. Right now I think it is mostly [reason] — and here is what tells me that: [evidence].
+
+What I am doing this week to change the trajectory
+• [Specific action 1 — e.g., refreshing photos and copy]
+• [Specific action 2 — e.g., a fresh push through my Mandarin and English networks]
+• [Specific action 3 — e.g., personally calling 10 buyer agents who shop in this price range]
+• [Specific action 4 — e.g., scheduling an open house this Saturday]
+
+My read
+One quiet week is data, not a verdict. I want to see how this week's actions move the needle before I make any bigger recommendations. If next week is also quiet, I will come to you with a clear set of options to consider — including price, photos, and timing.
+
+One last note
+I know quiet weeks are stressful. They are stressful for me too, because I want this home sold for you. You are not invisible to me, and I am not coasting. I will give you a quick call later today as well.
+
+Talk soon,
+Peter`,
+    phone: `[Opening]
+"Hi [NAME] — is now still a good time? I just wanted to follow up on the email I sent."
+
+[Acknowledge, do not repeat]
+"I know a quiet week can feel discouraging. The email has all the data — I am not going to walk through it again. I just wanted you to hear my voice on this, because numbers in writing can feel colder than they really are."
+
+[The reassurance — the actual purpose of the call]
+"I want you to know I am thinking about your listing constantly. The plan is the plan, and I am working it. Quiet weeks happen, and one of them is not a verdict on the home or on us."
+
+[Invite, do not push]
+"Is there anything you have been wondering about that you did not want to put in writing? Anything I can clear up for you?"
+
+[Listen — let them talk]
+[Mirror one specific word they use. Pause longer than feels natural after they finish. Ask one follow-up before pivoting.]
+
+[Close]
+"Thanks for picking up, [NAME]. I will be in touch again with the next update — and if anything changes during the week, you will hear from me before then."`,
+    why: "The seller's secret fear during a quiet week is that you have stopped working. The email gives them the data; the call gives them the reassurance. Keep it short — its purpose is not to repeat the email but to let them hear your voice. The line \"you are not invisible to me\" lands harder said out loud than read on a screen."
+  },
+
+  {
+    stage: "mid",
+    num: "M3",
+    title: "Week 3 Pivot — Time to Talk Strategy",
+    desc: "Two to three weeks in, no offer yet. Time for the strategy meeting. The email lays out three options. The call schedules the in-person meeting — never debate the options on the phone.",
+    tags: [
+      {
+        text: "Email + Call",
+        cls: "call"
+      },
+      {
+        text: "Week 3",
+        cls: ""
+      },
+      {
+        text: "Strategy",
+        cls: ""
+      }
+    ],
+    callMeta: {
+      timing: "Same day or next morning",
+      length: "~3 minutes",
+      purpose: "Schedule the in-person meeting"
+    },
+    subject: "[ADDRESS] — Week 3 Update: Time to Talk Strategy",
+    email: `Hi [NAME],
+
+We are at the three-week mark, which is the natural point in any listing where I sit down with my sellers and walk through where we are and where to go from here. I would like to do that with you this week.
+
+The numbers to date
+• Total showings: [X]
+• Total online views: [X]
+• Saves: [X]
+• Comparable listings that have sold since we listed: [X]
+• Comparable listings still on the market: [X]
+
+What the cumulative feedback is telling us
+Across [X] showings, the pattern has settled. Buyers respond well to [feature], and the consistent hesitation has been [hesitation]. That hesitation has not changed across the listing period — which means it is not random, it is structural, and it is something we should now factor into our next-stage plan.
+
+The three options I want to walk through with you
+1. HOLD — Stay the course one more week. Reasonable if we have any active buyer interest still in motion.
+2. REFRESH — Update the photos, copy, and possibly the staging without changing price. Resets the listing for buyers who saw it in week 1.
+3. ADJUST — A strategic price adjustment to move past the next price-filter threshold on Realtor.ca. The most aggressive option, but in the current market it is also the most reliable.
+
+None of these are wrong. They are just different ways to play the next stage, and the right answer depends on your timeline and your comfort. I have a recommendation, but I want to hear your thinking first.
+
+Can we find 30 minutes this week?
+I would prefer to do this in person at the home, or over coffee if that is easier. Would [day] at [time] or [day] at [time] work for you?
+
+I will give you a quick call to find a time that works.
+
+Talk soon,
+Peter`,
+    phone: `[Opening]
+"Hi [NAME] — is now still a good time? I just sent you the week 3 update by email. I am not going to walk through it on the phone — I want you to read it on your own time. I am calling for one reason only: to find a time this week to sit down together."
+
+[Frame the meeting — keep it light, not heavy]
+"This is a normal conversation that happens with every listing around the three-week mark. It is not bad news. There is nothing to dread. I want to walk through three options with you and figure out together what makes sense."
+
+[Offer concrete times]
+"I have [day] at [time] or [day] at [time] open this week. Either I can come to the house, or we can meet at [coffee shop]. Which works better for you?"
+
+[If they want to discuss on the phone]
+"I would much rather do this in person. The conversation is easier when we can look at the comparable data together. Twenty or thirty minutes is all we need."
+
+[If they sound worried about price]
+"I know the email mentioned a price adjustment as one option — please do not let that worry you. It is one of three options, and we will only do it if it makes sense for you. The whole point of the meeting is to look at the options together, not for me to push you into one."
+
+[Confirm and close]
+"[Day] at [time] then. I will [come to the house / see you at the coffee shop]. Thanks, [NAME] — I will see you then."`,
+    why: "This is the most important email of the listing period. The call has one job: schedule the meeting. Sellers who try to make big decisions on the phone often regret them. The line \"this is a normal conversation that happens with every listing around the three-week mark\" takes the dread out of it."
+  },
+
+  {
+    stage: "mid",
+    num: "M4",
+    title: "Price Reduction Recommendation",
+    desc: "After the strategy meeting, you have agreed (or you are formally recommending) a price reduction. This is the written record of the decision before it goes live.",
+    tags: [
+      {
+        text: "Email + Call",
+        cls: "call"
+      },
+      {
+        text: "Pre-Reduction",
+        cls: ""
+      },
+      {
+        text: "Decision",
+        cls: ""
+      }
+    ],
+    callMeta: {
+      timing: "Same day as email",
+      length: "~10 minutes",
+      purpose: "Confirm the decision and answer any final questions"
+    },
+    subject: "[ADDRESS] — Recommended Price Adjustment",
+    email: `Hi [NAME],
+
+Thank you for the conversation [yesterday / on date]. As discussed, I am writing to formally recommend a price adjustment, and to lay out the details so you have everything in writing before we move forward.
+
+The recommendation
+Adjust the list price from [$current] to [$new]. This represents a [X]% adjustment of [$amount].
+
+Why this number
+• It moves the listing past the [$threshold] price filter on Realtor.ca, which is where the next group of active buyers is searching
+• It positions us competitively against [the X comparable listings still on the market in our range]
+• Recent sales in our area have closed at an average of [$X], which supports a list price of [$new]
+• The [hesitation] feedback we have heard for [X] weeks tells us buyers are seeing the home as priced just above its current market value — this adjustment closes that gap
+
+What happens next
+1. You confirm the recommendation by replying to this email or signing the price-change amendment
+2. I update Realtor.ca, MLS, and all marketing materials within [X] hours
+3. I personally call every buyer agent who has shown the home to make sure they know about the change
+4. I push the adjusted listing back through my Mandarin and English networks with fresh copy
+5. We typically see the impact in showing volume within 3–5 days
+
+What I will not do
+I will not let this listing sit at the new price without active work. The adjustment is one part of the strategy — the other part is making sure the new price gets seen by the buyers it was meant for. That is on me.
+
+One last note
+I know this decision is not an easy one. Thank you for trusting me with the recommendation. I will call you later today to confirm and answer any final questions before we move forward.
+
+Talk soon,
+Peter`,
+    phone: `[Opening]
+"Hi [NAME] — is now still a good time? I sent the formal recommendation email this morning. I am calling to confirm and to answer anything that came up after you read it."
+
+[Give them space first]
+"Before I say anything else — what is on your mind? Anything you want to ask, anything you want to push back on?"
+
+[Listen carefully — this is the call's most important moment]
+[Sellers often have a quiet objection they did not raise in the meeting. This is when it surfaces. Mirror their words. Do not rush to reassure.]
+
+[Reaffirm the rationale only if asked]
+"The thing I keep coming back to is the [feedback pattern / threshold logic / comparable data]. That is the strongest signal we have, and the adjustment is the cleanest response to it."
+
+[The commitment]
+"Once you give me the go-ahead, I will have the price changed across every platform within [X] hours, and I will personally call every buyer agent who has shown the home. I want the new price working for us by the weekend."
+
+[Confirm clearly]
+"Are you comfortable moving forward at [$new]? If yes, I will send the amendment for your signature today."
+
+[Close]
+"Thank you, [NAME]. This is the right call, and we are going to work it hard. You will hear from me the moment anything material happens."`,
+    why: "The price reduction is the seller's most expensive emotional moment of the listing. The email gives them the rationale in writing so they can re-read it later. The call lets them air any quiet doubt that did not come out in the meeting. \"Before I say anything else — what is on your mind?\" is the line that makes them feel safe to push back if they need to."
+  },
+
+  {
+    stage: "mid",
+    num: "M5",
+    title: "Post Price Reduction",
+    desc: "A price reduction has just gone live. The seller is in a vulnerable emotional state — relief mixed with disappointment. The email shows the early data; the call delivers the warmth.",
+    tags: [
+      {
+        text: "Email + Call",
+        cls: "call"
+      },
+      {
+        text: "After Reduction",
+        cls: ""
+      },
+      {
+        text: "Reinforcement",
+        cls: ""
+      }
+    ],
+    callMeta: {
+      timing: "Same day as email",
+      length: "~5 minutes",
+      purpose: "Reinforce the strategy is working"
+    },
+    subject: "[ADDRESS] — Update: Strong Response to the Price Adjustment",
+    email: `Hi [NAME],
+
+Quick update on how the listing is responding since we adjusted the price on [date]. The early signal is encouraging.
+
+The numbers since the adjustment
+• New showings booked: [X] (compared to [X] in the equivalent period before)
+• Online views since the adjustment: [X] (a [X]% increase)
+• New saves: [X]
+• Buyer agents who have re-engaged after seeing the adjustment: [X]
+
+What this is telling us
+The adjustment moved the listing past the [price] filter on Realtor.ca, which is exactly the threshold we wanted to clear. The increase in views and showings is the standard response when a listing crosses a price-filter boundary — buyers who never saw the listing before are now seeing it for the first time. This is the strategy working as designed.
+
+What I am doing this week
+• Personally calling every buyer agent who showed before the adjustment, to make sure they know about it
+• Pushing the adjusted listing back through my Mandarin and English networks with fresh copy
+• Hosting [an open house / a broker's open] this Saturday
+• Preparing for offer conversations — I expect at least one this week
+
+My read
+We made the right call, and the market is confirming it. The goal was never just "lower price" — it was "get past the threshold where the next group of buyers is searching." That has happened. Now the work shifts to converting the new attention into an offer.
+
+One last note
+I know the price conversation last week was not an easy one. Thank you for trusting me with the recommendation. The numbers above are the early proof that the strategy is working — and I will keep you closely updated.
+
+I will give you a quick call later today as well.
+
+Talk soon,
+Peter`,
+    phone: `[Opening]
+"Hi [NAME] — is now still a good time? I sent the update email a few hours ago. I wanted to follow up by phone so you could hear the news from me directly."
+
+[Lead with the good news]
+"The early numbers are tracking exactly how I expected. The adjustment did its job — we are seeing more showings booked, more views, and buyer agents who never engaged before are reaching out for the first time. That is the strategy working as designed."
+
+[Acknowledge the emotional weight — the heart of the call]
+"I want to acknowledge something. Last week's price conversation was not easy. I know that. Thank you for trusting me with the recommendation. It takes a lot to make that call, and you made the right one."
+
+[Forward-looking]
+"My focus this week is converting the new attention into an offer. I am personally calling every buyer agent who showed before the adjustment, and I am preparing for offer conversations. I expect at least one this week."
+
+[Invite questions]
+"Is there anything you want to ask, or anything that is on your mind?"
+
+[Listen — let them respond]
+[They may share relief, or lingering disappointment, or both. Mirror their actual words. Do not rush to fill silence.]
+
+[Close]
+"Thank you, [NAME]. You will hear from me the moment anything material happens this week. Talk to you soon."`,
+    why: "The line \"thank you for trusting me with the recommendation\" is the one to deliver out loud, slowly. It earns back any like the price conversation may have temporarily cost you."
+  },
+
+  {
+    stage: "showings",
+    num: "S1",
+    title: "Open House Recap",
+    desc: "Within 24 hours of an open house. Foot traffic, agent visits, repeat visitors, feedback patterns. Especially valuable when the open house was the seller's idea.",
+    tags: [
+      {
+        text: "Email Only",
+        cls: ""
+      },
+      {
+        text: "Open House",
+        cls: ""
+      },
+      {
+        text: "Within 24 hrs",
+        cls: ""
+      }
+    ],
+    subject: "[ADDRESS] — Open House Recap (Saturday/Sunday)",
+    email: `Hi [NAME],
+
+Quick recap of [Saturday's / Sunday's] open house while it is still fresh.
+
+The numbers
+• Total visitors through the door: [X]
+• Buyer agents who attended: [X]
+• Repeat visitors (people who had been before): [X]
+• Sign-in cards collected: [X]
+• Online views over the open house weekend: [X]
+
+What the visitors were responding to
+The most consistent positive comment was [feature]. The most common question was [question]. Two visitors asked specifically about [follow-up trigger — e.g., the basement, the school catchment, parking].
+
+The visitors worth following up on
+[Two or three specific visitors who showed real interest — describe in general terms]:
+• [Visitor profile A]: spent [X] minutes, asked detailed questions about [topic], left a sign-in. Following up Monday.
+• [Visitor profile B]: came with their own agent, walked through twice. Their agent and I are scheduled to talk Monday.
+
+What this tells us
+Open houses produce two kinds of value: the offer that comes from someone who walks through, and the data that tells us how the broader buyer pool is reacting. This weekend gave us both. [One specific insight — e.g., "the parking question coming up four times tells me we should add a clarifying line to the listing."]
+
+What I am doing this week
+• Personally following up with every sign-in card by Tuesday
+• Following up with the [X] buyer agents who attended
+• Adjusting the listing copy to address [the recurring question]
+• [Specific next step]
+
+One last note
+Thank you for being out of the house all weekend — I know that is a lot to ask, and the feedback above is the reason it was worth it.
+
+Talk soon,
+Peter`,
+    why: "The open house recap matters most when the open house was the seller's idea — they want to know whether their instinct paid off. The like is earned by the specific recap (named visitor profiles, specific feedback patterns), not just the foot-traffic number. Acknowledging \"thank you for being out of the house all weekend\" is the human moment."
+  },
+
+  {
+    stage: "showings",
+    num: "S2",
+    title: "Buyer Second Showing Booked",
+    desc: "A buyer is coming back for a second showing. Short, low-pressure email that manages expectations gently — second showings often mean an offer is coming, but not always.",
+    tags: [
+      {
+        text: "Email Only",
+        cls: ""
+      },
+      {
+        text: "Second Showing",
+        cls: ""
+      },
+      {
+        text: "Brief",
+        cls: ""
+      }
+    ],
+    subject: "[ADDRESS] — Second Showing Booked",
+    email: `Hi [NAME],
+
+A quick note — a buyer who toured the home on [date] has booked a second showing for [date / time].
+
+What this usually means
+Second showings happen for two reasons. Either the buyer is moving toward an offer and wants to confirm details with someone (a partner, a parent, an inspector friend), or they are still comparing the home against another property and want one more look. Both are good signs — neither is a guarantee.
+
+What I am doing
+• Talking to the buyer agent today to understand what they are coming back to look at specifically
+• Making sure the home is showing at its best for the second visit
+• Standing by to receive an offer or follow-up questions in the days after
+
+What you can do
+Keep the home in show-ready condition through [date]. If you can be out for the showing, that is ideal — buyers talk more openly when sellers are not present.
+
+I will let you know what I learn from the buyer agent, and I will follow up after the showing itself.
+
+Talk soon,
+Peter`,
+    why: "Sellers often hear \"second showing\" and immediately mentally cash the offer. The like is earned by managing expectations honestly — explaining that second showings can go either way — without being a wet blanket. The line \"both are good signs — neither is a guarantee\" is the calibration the seller needs."
+  },
+
+  {
+    stage: "showings",
+    num: "S3",
+    title: "Showing Access Issue",
+    desc: "The seller has been declining showing requests, or access has been hard. Diplomatic note that addresses the pattern without preaching.",
+    tags: [
+      {
+        text: "Email Only",
+        cls: ""
+      },
+      {
+        text: "Sensitive",
+        cls: "red"
+      },
+      {
+        text: "Boundary",
+        cls: ""
+      }
+    ],
+    subject: "[ADDRESS] — Quick Note on Showing Access",
+    email: `Hi [NAME],
+
+I wanted to send a quick note about something I have noticed over the past [X] days — and I want to raise it gently because I know your life is busy.
+
+What I am seeing
+Of the [X] showing requests we received last week, we were able to accommodate [X]. The others were either declined or rescheduled to a window the buyer agents could not make.
+
+Why I am raising it
+Buyers and their agents shop fast in this market. When a showing window does not work for them, they typically move on to the next listing rather than wait. Each missed showing is potentially a missed buyer.
+
+What I would like to suggest
+If you are open to it, I would propose a daily showing window — for example, [4pm–8pm on weekdays and 11am–5pm on weekends]. Buyers can book within that window with [2 / 4 / 24] hours notice, and outside the window we would only schedule by special request.
+
+This gives you predictability, and it gives buyer agents something they can confidently book against.
+
+I am open to whatever rhythm works for you — I just wanted to put the option on the table because I do not want a missed showing to cost us a buyer.
+
+Let me know your thoughts. Happy to talk through it on the phone if easier.
+
+Talk soon,
+Peter`,
+    why: "This is a sensitive message — the seller may feel criticized. The like is earned by acknowledging their busy life FIRST, framing the issue as data (\"of X requests, we accommodated Y\") rather than fault, and proposing a structured solution rather than just complaining. The line \"I do not want a missed showing to cost us a buyer\" makes it about them, not about you."
+  },
+
+  {
+    stage: "offers",
+    num: "O1",
+    title: "Offer Received",
+    desc: "A single offer has come in. The seller is suddenly emotional — you need to brief them quickly without inflating expectations or causing panic.",
+    tags: [
+      {
+        text: "Email + Call",
+        cls: "call"
+      },
+      {
+        text: "Offer",
+        cls: "green"
+      },
+      {
+        text: "Time-Sensitive",
+        cls: "red"
+      }
+    ],
+    callMeta: {
+      timing: "Within 1 hour of email",
+      length: "~15 minutes",
+      purpose: "Walk through the offer and decide on response"
+    },
+    subject: "[ADDRESS] — Offer Received — Action Needed by [Date/Time]",
+    email: `Hi [NAME],
+
+We have received an offer. Here are the key details so you can review before we talk.
+
+The offer summary
+• Buyer: [represented by AGENT NAME at BROKERAGE]
+• Offer price: [$X] (against our list of [$current])
+• Deposit: [$X], delivered within [X] hours of acceptance
+• Closing date: [date]
+• Conditions: [e.g., "5 business days for financing and home inspection" / "no conditions — firm offer"]
+• Inclusions: [as per listing / specific items requested]
+• Irrevocable until: [date / time] — we have until then to respond
+
+My initial read
+[One short paragraph — e.g., "This is a serious offer from a well-qualified buyer. The price is below our ask but within the range I expected based on this week's feedback. The conditions are standard. The closing date works with your timeline."]
+
+The three response options
+1. ACCEPT as written
+2. SIGN BACK with adjustments to [price / conditions / closing date]
+3. REJECT and stay on the market
+
+I have a recommendation, but I want to walk through it with you on the phone so we can talk through your priorities first.
+
+Next step
+I will call you in the next hour to walk through the offer in detail. If now is not a good time, please text me a window that works — we have until [irrevocable time] to respond, but earlier is better than later.
+
+Do not respond to the offer until we have spoken. The buyer agent has been told they will hear from us by [time].
+
+Talk in a few,
+Peter`,
+    phone: `[Opening]
+"Hi [NAME] — is now still a good time? I sent the offer summary by email so you have it in writing. Have you had a chance to read it?"
+
+[Calibrate the moment]
+"Before we get into the details — how are you feeling? An offer is exciting and stressful at the same time. I want to make sure we are thinking clearly, not reactively."
+
+[Walk through the offer cleanly]
+"Let me walk through the four things that matter most. Price: [$X]. Deposit: [$X]. Closing date: [date]. Conditions: [list]. Anything in there you want me to clarify before we talk strategy?"
+
+[Get their first instinct]
+"Before I share my recommendation, I want to know what your gut is telling you. Where would you want to land if you could?"
+
+[Listen carefully]
+[Their first instinct often reveals the priority that should drive the response — price, certainty, timing. Mirror their actual words.]
+
+[Now share your read]
+"Here is what I am thinking. [Recommendation with reasoning — 2-3 sentences]. The strongest move I see is [accept / sign back at $X / sign back on conditions]. Here is why."
+
+[Address their concerns]
+"What is your reaction to that? What would make you uncomfortable about it?"
+
+[Lock the decision]
+"To be clear on what we are doing: we are [accepting / signing back at $X with these changes]. I will draft the response and send it for your signature within the hour. We need it back to the buyer agent by [time]."
+
+[Close]
+"This is a real moment. Thank you for keeping a clear head with me. I will call you the moment we hear back from the buyer side."`,
+    why: "Offers create emotional spikes that can lead to rushed decisions. The email gives the seller written details to anchor them; the call walks through the response. The line \"before I share my recommendation, I want to know what your gut is telling you\" both honours their autonomy and surfaces the priority that should drive the response. Never let a seller respond to an offer in writing without first talking through it on the phone."
+  },
+
+  {
+    stage: "offers",
+    num: "O2",
+    title: "Multiple Offers / Bidding Situation",
+    desc: "Two or more offers in hand. High-stakes, time-compressed. Email lays out the offers side-by-side; call walks through the response strategy.",
+    tags: [
+      {
+        text: "Email + Call",
+        cls: "call"
+      },
+      {
+        text: "Multiple Offers",
+        cls: "green"
+      },
+      {
+        text: "High Stakes",
+        cls: "red"
+      }
+    ],
+    callMeta: {
+      timing: "Immediately after email",
+      length: "~20 minutes",
+      purpose: "Decide on response strategy together"
+    },
+    subject: "[ADDRESS] — Multiple Offers Received — Action Needed by [Time]",
+    email: `Hi [NAME],
+
+We have received [X] offers. Here is the side-by-side comparison so you can see the picture clearly before we talk.
+
+The offers (best on top by my read)
+
+OFFER 1 — [Agent / brokerage]
+• Price: [$X]
+• Deposit: [$X], delivered within [X] hours
+• Closing: [date]
+• Conditions: [list]
+• Strengths: [what makes this offer attractive]
+• Weaknesses: [what is concerning]
+
+OFFER 2 — [Agent / brokerage]
+• Price: [$X]
+• Deposit: [$X]
+• Closing: [date]
+• Conditions: [list]
+• Strengths: [list]
+• Weaknesses: [list]
+
+OFFER 3 — [Agent / brokerage]
+• Price: [$X]
+• Deposit: [$X]
+• Closing: [date]
+• Conditions: [list]
+• Strengths: [list]
+• Weaknesses: [list]
+
+My initial read
+The highest price is not always the best offer. [One paragraph — typically explaining the trade-offs between price, conditions, deposit size, and closing certainty.]
+
+The three response strategies
+1. ACCEPT the strongest offer outright
+2. SIGN BACK to one buyer with adjustments — typically used when one offer stands clearly above the others but needs a small price or condition tweak
+3. SEND ALL BUYERS BACK FOR HIGHEST AND BEST — used when offers are close enough that we want to give each buyer one chance to improve. Higher upside but some risk that buyers walk away if they feel the process is uncertain.
+
+Each strategy carries different risk and upside. We need to choose deliberately, not reactively.
+
+Next step
+I will call you within the hour to walk through this in detail. We have until [time] to respond. Do not contact any of the buyer agents directly until we have talked through the strategy.
+
+Talk in a few,
+Peter`,
+    phone: `[Opening]
+"Hi [NAME] — is now still a good time? You have the email with the side-by-side comparison. This is going to be one of the most important conversations of the listing."
+
+[Set the tone]
+"This is a really good problem to have. Let's think through it carefully — we have time, we just have to use it well."
+
+[Walk through each offer briefly]
+"Let me touch on each offer in 30 seconds, and then we'll talk strategy."
+[Brief recap of each offer's strongest selling point and biggest weakness.]
+
+[Get their gut read]
+"Before I share my recommendation — which offer feels right to you, just on instinct? And why?"
+
+[Listen — the answer reveals their priority]
+[Are they prioritizing top-line price? Closing certainty? A condition-free firm offer? Their instinct tells you what matters to them.]
+
+[Talk through the three strategies]
+"There are three ways to play this. Let me walk through each one — what it gets us, what it risks. [Walk through ACCEPT, SIGN BACK, HIGHEST AND BEST.]"
+
+[Make the recommendation]
+"My recommendation is [strategy], for these reasons: [2-3 sentences]. But this decision is yours — there is no wrong answer, only different trade-offs."
+
+[Lock the decision]
+"To be clear: we are going with [strategy]. I will [draft the response / contact the agents] in the next [X minutes]. We need to be back to all parties by [time]."
+
+[Close]
+"You are in a strong position here. Whatever we choose, we are choosing from strength. I will call you the moment I have responses back."`,
+    why: "Multiple offers feel like a triumph but contain real risk if handled poorly. The email gives the seller a calm side-by-side comparison BEFORE emotion takes over. On the call, asking \"which offer feels right to you, just on instinct?\" reveals their priority — which is what should drive the strategy. The line \"this is a really good problem to have\" recalibrates the energy from frantic to deliberate."
+  },
+
+  {
+    stage: "offers",
+    num: "O3",
+    title: "Offer Accepted / Firm Sale",
+    desc: "The offer has been accepted (or all conditions waived). Celebratory but professional — confirms what was agreed, what happens next, and sets the tone for the post-acceptance period.",
+    tags: [
+      {
+        text: "Email Only",
+        cls: ""
+      },
+      {
+        text: "Sold",
+        cls: "green"
+      },
+      {
+        text: "Confirmation",
+        cls: ""
+      }
+    ],
+    subject: "[ADDRESS] — Sold! Here is What Happens Next",
+    email: `Hi [NAME],
+
+Congratulations — we have a deal.
+
+The accepted terms
+• Buyer: [represented by AGENT NAME]
+• Sale price: [$X]
+• Deposit: [$X] — due within [X] hours of acceptance
+• Closing date: [date]
+• Conditions: [if firm: "None — firm offer." If conditional: list with deadlines.]
+• Inclusions: [as agreed]
+
+What happens next — your timeline
+1. Deposit lands in our brokerage trust account by [date / time]
+2. Lawyer information — please send me your real estate lawyer's contact details by [date]. If you do not have one, I can recommend two or three I trust.
+3. [If conditional: Condition deadlines — financing by [date], inspection by [date]. I will be in close contact with the buyer agent through this period and will update you whenever there is news.]
+4. Pre-closing walkthrough — typically a few days before closing, the buyer will request a walkthrough. I will coordinate.
+5. Closing day — your lawyer handles the paperwork; you will need to be available to sign documents and hand over keys.
+
+What I am doing this week
+• Confirming the deposit lands on time
+• Sending the executed agreement to your lawyer once you provide their details
+• [If conditional: Coordinating with the buyer agent through the condition period]
+• Updating Realtor.ca and MLS to "Sold Conditional" / "Sold Firm" status
+• Preparing the file for closing
+
+What you should do this week
+• Send me your lawyer's contact details
+• Start thinking about your move date and any service transfers (utilities, internet, mail forwarding)
+• Continue keeping the home in good condition through the closing date — buyers will do a walkthrough before closing
+
+One last note
+This is a great result. You earned it by trusting the process — keeping the home showing-ready, considering my recommendations seriously, and making the hard calls when they came. Thank you for that.
+
+I will be in touch through every step from here to closing. If anything comes up at any time, call or text me directly.
+
+Talk soon,
+Peter`,
+    why: "Sellers often feel weirdly empty after accepting an offer — the long anticipation ends with paperwork, not fanfare. This email fills that void with clear next steps and credits them for the result (\"you earned it by trusting the process\"). The \"what I am doing\" / \"what you should do\" structure reduces post-acceptance anxiety."
+  },
+
+  {
+    stage: "offers",
+    num: "O4",
+    title: "Offer Expired or Rejected",
+    desc: "A buyer walked away — either we rejected their offer, or they let theirs expire. Address the disappointment honestly and pivot to what it tells us.",
+    tags: [
+      {
+        text: "Email + Call",
+        cls: "call"
+      },
+      {
+        text: "Offer Lost",
+        cls: "red"
+      },
+      {
+        text: "Recovery",
+        cls: ""
+      }
+    ],
+    callMeta: {
+      timing: "Same day, within hours",
+      length: "~5 minutes",
+      purpose: "Acknowledge disappointment, redirect forward"
+    },
+    subject: "[ADDRESS] — Update on the [Buyer's Name / Recent] Offer",
+    email: `Hi [NAME],
+
+Quick update on where we landed with the [recent] offer.
+
+What happened
+[Honest summary in 2-3 sentences. E.g., "We countered at $X. The buyer came back at $Y. We were not able to close the gap, and the offer expired at [time]. The buyer agent confirmed today that the buyers have moved on to another property." Or: "We declined the offer because the price was too far below our range and the conditions were not workable."]
+
+What it tells us
+Not every offer leads to a sale, and that is normal. What this offer told us is useful information:
+• The buyer was [serious / lukewarm / very price-sensitive]
+• The price they were willing to pay [tells us / does not tell us] something meaningful about the broader market
+• The conditions they wanted [are / are not] something to expect from other buyers
+
+What I am doing this week
+• Following up with every other buyer agent who has shown the home in the past [X] weeks — this offer signals to them that the home is in active negotiation, which sometimes prompts a competing offer
+• Continuing all marketing channels — the listing stays fully active
+• Watching the comparable activity for any new signals
+
+My read
+Offers that fall through can feel like setbacks, but they often accelerate the next conversation. Buyer agents in our area now know the home was in active negotiation. That is useful information for them, and it usually generates new interest within a few days.
+
+I will give you a quick call later today as well.
+
+Talk soon,
+Peter`,
+    phone: `[Opening]
+"Hi [NAME] — is now still a good time? I just sent you the email about where we landed with the [buyer's] offer. I wanted to follow up by phone."
+
+[Acknowledge the disappointment]
+"I know this is disappointing. We came close, and close that does not finish is hard. I want to acknowledge that before anything else."
+
+[Redirect]
+"Here is what I want you to know. Offers fall through. It happens with maybe a third of all listings. It is not a verdict on the home or on us. It is information."
+
+[The forward-looking part]
+"The useful thing is that buyer agents in our area now know the home was in active negotiation. That tends to generate new interest within a few days. I am working that signal hard this week."
+
+[Invite reaction]
+"How are you feeling about it? Anything you want to ask, or anything that is on your mind?"
+
+[Listen — they may want to debrief]
+[Mirror their words. Let them process. Do not rush to the next topic.]
+
+[Close]
+"Thanks, [NAME]. We are not done. I will be back to you within a couple of days with the next signal."`,
+    why: "Lost offers feel like death by a thousand cuts. The email gives the honest summary; the call delivers acknowledgment. The line \"close that does not finish is hard\" names the feeling without melodrama. \"It is not a verdict on the home or on us\" reframes the loss as information, not a failure."
+  },
+
+  {
+    stage: "conditional",
+    num: "C1",
+    title: "Inspection Coming Up",
+    desc: "The buyer's home inspection is scheduled. Frames the inspection as a normal next step, not a threat.",
+    tags: [
+      {
+        text: "Email Only",
+        cls: ""
+      },
+      {
+        text: "Pre-Inspection",
+        cls: ""
+      }
+    ],
+    subject: "[ADDRESS] — Heads Up: Inspection on [Date]",
+    email: `Hi [NAME],
+
+Just a heads-up — the buyer has scheduled their home inspection for [date / time]. I wanted to walk through what to expect, since the inspection is a moment in the process that can feel bigger than it usually is.
+
+What is happening
+A licensed home inspector hired by the buyer will spend [2–3 hours] going through the home. They will look at the structure, roof, foundation, plumbing, electrical, HVAC, windows, insulation, and any visible signs of past or present issues. The buyer and their agent typically attend.
+
+What you can expect
+• Most inspections turn up some items. That is normal — inspectors are paid to find things.
+• The vast majority of items are cosmetic or maintenance-level (caulking, weatherstripping, minor wear) and are not deal-affecting.
+• Material findings (significant electrical, plumbing, structural, or moisture issues) are uncommon and we have already discussed any that you flagged on the walkthrough.
+• You do not need to be present — and it is generally better if you are not. Inspectors and buyers talk more openly without the seller in the room.
+
+What you can do
+• Make sure the inspector has clear access to the panel, furnace, water heater, attic hatch, and any crawl spaces
+• Replace any burned-out lightbulbs in the next [day or two] — inspectors flag bulbs they cannot test
+• Leave the home in normal condition. No need to deep clean — this is not a showing.
+
+What happens after
+The buyer will receive the inspection report within [24–48 hours]. Their agent and I will then talk about what was found. If everything is in good shape, we move toward firming the deal. If something material comes up, we will have a focused conversation about how to handle it — and I will call you immediately if that happens.
+
+Most inspections are uneventful. I just want you prepared for the day.
+
+Talk soon,
+Peter`,
+    why: "Sellers brace for inspections like they are exams. The email defuses that by explaining what is normal, what is rare, and what you will do at each stage. The line \"most inspections turn up some items — that is normal\" is the calibration that prevents panic when the report comes back with a list."
+  },
+
+  {
+    stage: "conditional",
+    num: "C2",
+    title: "Inspection Issues Found",
+    desc: "The inspection turned up real issues. Often the most stressful moment of any deal. Three-part bad news structure — acknowledge, deliver, plan.",
+    tags: [
+      {
+        text: "Email + Call",
+        cls: "call"
+      },
+      {
+        text: "Inspection",
+        cls: "red"
+      },
+      {
+        text: "High Stakes",
+        cls: "red"
+      }
+    ],
+    callMeta: {
+      timing: "Call FIRST, then email",
+      length: "~15 minutes",
+      purpose: "Deliver news, frame the response"
+    },
+    subject: "[ADDRESS] — Inspection Update — Items to Discuss",
+    email: `Hi [NAME],
+
+As discussed on the phone — here is the written summary of where we are with the inspection, so you have it for reference.
+
+What was found
+The inspection identified [number] significant items:
+
+1. [Issue 1] — [brief description]. [Inspector's recommended remedy: e.g., "have a licensed plumber assess and repair."]
+2. [Issue 2] — [brief description]. [Recommended remedy.]
+3. [Issue 3 if applicable]
+
+Other items in the report were cosmetic or maintenance-level and are not part of this conversation.
+
+What this likely means
+The buyer will most likely come back to us with one of three requests:
+• A price reduction reflecting the cost of the repairs
+• A credit at closing in lieu of price reduction
+• A request that we complete the repairs before closing
+
+It is also possible they walk away from the deal — but with items of this kind, that is the less common outcome. Buyers who have invested time in inspection and condition removal are typically motivated to find a path forward.
+
+My recommended response
+[Your recommendation in 2-3 sentences. E.g., "I would recommend offering a closing credit of $X, which is the realistic mid-range cost of the repairs. This avoids the complications of doing repairs ourselves on a tight timeline, and a credit is what buyers typically prefer."]
+
+What I am doing today
+• Talking to the buyer agent to understand exactly what response we should expect from them
+• Getting two quick repair cost estimates so we have real numbers to work with
+• Standing by to draft our response the moment we hear back from the buyer
+
+Next step
+The buyer's response is likely to come within [24–48 hours]. I will call you the moment I hear from the buyer agent. In the meantime, we have time and we have options. Do not lose sleep over this — that is what you have me for.
+
+Talk soon,
+Peter`,
+    phone: `[Opening — call FIRST, before any email]
+"Hi [NAME] — is now still a good time? I have the inspection report back. There are some items I need to walk through with you."
+
+[Acknowledge]
+"I want to be upfront with you. The inspection turned up some items that we will need to address. It is not a disaster, but it is a conversation. Are you in a place where you can talk through it, or should I call back in a bit?"
+
+[Deliver clearly — no padding]
+"There are [number] items that matter. The first is [item]. The inspector recommends [remedy]. The second is [item]. [Remedy]. [Continue.] The other items in the report are cosmetic and not part of this conversation."
+
+[Frame what it means — not the worst case]
+"Here is what this likely means in practice. The buyer will most likely come back asking for one of three things: a price reduction, a closing credit, or that we do the repairs ourselves. It is also possible they walk, but with items at this level, that is the less common outcome."
+
+[Pivot to the plan]
+"Here is what I am doing today. I am talking to the buyer agent to understand what response to expect. I am getting two repair estimates so we have real numbers. And I am standing by to draft our response the moment we hear from them."
+
+[The recommendation]
+"My recommendation, when their request comes in, will be [recommendation with 2-sentence reasoning]. But we will decide together once we see what they actually ask for."
+
+[Reassurance]
+"This is a normal part of the process. It feels big right now, but most deals get through this stage. We have time and we have options."
+
+[Invite reaction]
+"What are you thinking? What is your gut response to all of this?"
+
+[Listen]
+[Sellers often want to vent or want to know if it's their fault. Mirror their words. Let them process.]
+
+[Close]
+"I will call you the moment I hear back from the buyer agent. I will also send you a written summary of this conversation so you have it for reference. Try not to lose sleep over this — that is what you have me for."`,
+    why: "Inspection issues are often the deal's scariest moment. ALWAYS call first — sellers should never learn this kind of news in writing. The three-part structure (acknowledge → deliver → plan) protects them from the dread of unknown bad news. The line \"do not lose sleep over this — that is what you have me for\" is the one to deliver out loud, slowly. The email is the written record they can refer back to once the call is done."
+  },
+
+  {
+    stage: "conditional",
+    num: "C3",
+    title: "Buyer Requesting Concession or Repair",
+    desc: "After the inspection, the buyer has formally asked for a price reduction, credit, or repairs. The negotiation moment.",
+    tags: [
+      {
+        text: "Email + Call",
+        cls: "call"
+      },
+      {
+        text: "Negotiation",
+        cls: ""
+      },
+      {
+        text: "Time-Sensitive",
+        cls: "red"
+      }
+    ],
+    callMeta: {
+      timing: "Within 1 hour of email",
+      length: "~15 minutes",
+      purpose: "Decide on the counter-response"
+    },
+    subject: "[ADDRESS] — Buyer's Inspection Request — Action Needed",
+    email: `Hi [NAME],
+
+The buyer has come back with their inspection-related request. Here are the details so you can review before we talk.
+
+What they are requesting
+[Specifics — e.g., "A $X price reduction" / "A $X closing credit" / "That we complete the following repairs before closing: [list]"]
+
+The reasoning they gave
+[1-2 sentences from the buyer agent's communication.]
+
+My read
+[Your assessment in 3-4 sentences. E.g., "The request is in the range I expected — typical for findings of this nature. The dollar amount is roughly [reasonable / aggressive / modest] relative to actual repair costs, which I have estimated at $X. I think there is room to negotiate, and I do not believe the buyer is at a hard ceiling."]
+
+The three response options
+1. ACCEPT as proposed — fastest path to closing, no further uncertainty
+2. COUNTER at [$X / different terms] — gets us a better outcome but extends the timeline by a few days
+3. DECLINE entirely — only if we believe the buyer will accept the deal anyway, which carries some risk
+
+I have a recommendation, but the decision is yours and I want to walk through it on the phone.
+
+Next step
+I will call you within the hour. The buyer is expecting a response by [time / date]. We have time to think, but not unlimited time.
+
+Talk in a few,
+Peter`,
+    phone: `[Opening]
+"Hi [NAME] — is now still a good time? You have the email with the buyer's request. Have you had a chance to read it?"
+
+[Calibrate]
+"This is the part of the deal where the buyer tries to recover some money based on the inspection. It is normal, and we have room to work with it. How are you feeling about it?"
+
+[Walk through the request]
+"The ask is [$X / repairs / credit]. The repair costs I have estimated are roughly $Y. So they are asking for [more than / about / less than] the realistic cost. That tells me [how much room we have to push back]."
+
+[Get their priorities]
+"Before I share my recommendation, what matters most to you here? Is it getting the deal closed quickly? Is it making sure we do not over-pay on the concession? Is it making sure no repairs come back to bite us later?"
+
+[Listen — their priority drives the response]
+
+[Recommendation]
+"Here is what I would recommend. [2-3 sentences]. The strongest move I see is to counter at [$X / these terms]. Here is why."
+
+[Address their concerns]
+"What is your reaction? What worries you about that approach?"
+
+[Lock the decision]
+"To be clear — we are countering at [$X / these terms]. I will draft the response and send it to the buyer agent today. I expect to hear back within 24 hours."
+
+[Close]
+"This is the home stretch. We are going to close this deal. I will call you the moment I have the buyer's response."`,
+    why: "The inspection negotiation is where deals get won or lost on small dollars. The email gives the seller a clear summary of options; the call lets you align on priorities before responding. Asking \"what matters most to you here?\" reveals whether the seller wants to fight for every dollar or close the deal smoothly — and the right response depends on their answer."
+  },
+
+  {
+    stage: "operational",
+    num: "X1",
+    title: "Listing Renewal Decision",
+    desc: "Listing has been on the market 60+ days, agreement is approaching expiration. Frames renewal vs. re-list vs. take-it-off-market honestly.",
+    tags: [
+      {
+        text: "Email + Call",
+        cls: "call"
+      },
+      {
+        text: "Renewal",
+        cls: ""
+      },
+      {
+        text: "Strategy",
+        cls: ""
+      }
+    ],
+    callMeta: {
+      timing: "Same day or next morning",
+      length: "~5 minutes",
+      purpose: "Schedule the renewal meeting"
+    },
+    subject: "[ADDRESS] — Our Listing Agreement — Three Paths Forward",
+    email: `Hi [NAME],
+
+Our listing agreement is set to expire on [date]. I want to use this moment for an honest conversation about the path forward, and to lay out the three options before we meet.
+
+Where we are
+We have been on the market for [X] days. We have had [X] showings, [X] online views, and [X] formal offers. The most consistent feedback has been [pattern].
+
+The three paths forward
+1. RENEW the agreement at the current price and approach
+   When this makes sense: if recent activity is showing signs of momentum (more showings, returning buyers, market warming up).
+
+2. RE-LIST with a refreshed strategy
+   When this makes sense: if we have a clear sense of what to change — price, photos, timing, staging — and we believe a relaunch will produce different results.
+
+3. TAKE THE HOME OFF THE MARKET
+   When this makes sense: if your timeline has changed, if the market is genuinely against us right now, or if we believe waiting [X] months and trying again is the better play.
+
+What I want you to know
+There is no wrong answer among these three. What matters is that we choose deliberately, based on your goals and what we have learned over the past [X] days.
+
+Can we find 30 minutes this week?
+Same as our week-3 conversation — I would prefer in person at the home, or over coffee. Would [day] at [time] or [day] at [time] work for you?
+
+I will give you a quick call to find a time.
+
+Talk soon,
+Peter`,
+    phone: `[Opening]
+"Hi [NAME] — is now still a good time? I sent you the email about our agreement coming up. I am calling to find a time to sit down."
+
+[Frame the conversation]
+"Like our week-3 conversation, this is a normal moment in any extended listing. There is no wrong answer among the three options. The point is to make a deliberate choice."
+
+[Offer concrete times]
+"I have [day] at [time] or [day] at [time] open. Either I can come to the house, or we can meet at [coffee shop]. Which works better?"
+
+[If they want to discuss now]
+"I would rather do this in person. The conversation is more honest when we can look at the data together. Twenty or thirty minutes is enough."
+
+[Confirm and close]
+"[Day] at [time] then. Thanks, [NAME] — I will see you then."`,
+    why: "Renewal conversations are awkward because they implicitly raise the question \"are we doing this right?\" The email frames the meeting as a normal decision point with three legitimate paths — not as a referendum on your performance. Like the week-3 pivot, the call's only job is to schedule the meeting. The actual decision happens in person."
+  },
+
+  {
+    stage: "operational",
+    num: "X2",
+    title: "Withdrawing the Listing",
+    desc: "The seller has decided to take the home off the market. Often emotional. Closes the listing professionally while keeping the door open for future relisting.",
+    tags: [
+      {
+        text: "Email + Call",
+        cls: "call"
+      },
+      {
+        text: "Withdrawal",
+        cls: ""
+      },
+      {
+        text: "Sensitive",
+        cls: "red"
+      }
+    ],
+    callMeta: {
+      timing: "Same day as decision",
+      length: "~10 minutes",
+      purpose: "Confirm decision, set expectations for next steps"
+    },
+    subject: "[ADDRESS] — Confirming Our Decision and Next Steps",
+    email: `Hi [NAME],
+
+As we discussed, I am writing to confirm our decision to withdraw the listing from the market.
+
+What I will do this week
+1. Update Realtor.ca, MLS, and all marketing channels to remove the active listing — this happens within [X] hours
+2. Take down all signage at the home
+3. Notify the buyer agents who have shown the home that the listing is no longer active
+4. Archive your file in good order so it is ready for relisting whenever you decide to come back
+
+What stays in place
+• Your information is safe with me — I do not share it
+• Whenever you are ready to revisit selling, the work we have done together is the foundation. We do not start from scratch.
+• I will check in with you in [3 / 6 months] to see how things are — no pressure, just to stay connected
+
+What this means and does not mean
+Withdrawing now is a strategic choice — it is not a failure. Many sellers withdraw, regroup, and come back at a better moment. The home does not lose value because it spent time on the market — but the market resets when we relaunch, which is often actually helpful.
+
+If your situation changes
+If at any point your timeline shifts and you want to come back to the market, call or text me directly. We can move quickly because we already know the home, the strategy, and each other.
+
+One last note
+Thank you for trusting me with this listing. Real estate decisions are rarely just about the property — they are about lives, timing, and the right moment. You are making the right call for where you are right now.
+
+I will give you a quick call later today.
+
+Talk soon,
+Peter`,
+    phone: `[Opening]
+"Hi [NAME] — is now still a good time? I sent the confirmation email. I wanted to follow up by phone to make sure we are aligned on everything before I take the listing down."
+
+[Acknowledge the moment]
+"Withdrawing a listing is an emotional decision, even when it is the right one. I want to acknowledge that. There is no shame in this call. Many sellers withdraw, take a beat, and come back at the right moment."
+
+[Confirm the operational details]
+"I will be removing the listing from all platforms this afternoon. Signage comes down [tomorrow]. The buyer agents who have shown the home will be notified by end of day. Any of that you want me to handle differently?"
+
+[The forward-looking part]
+"I will check in with you in [3 / 6 months] — no pressure, just to stay in touch. And if anything changes before then, call or text me directly. We can move fast because we already know the home and each other."
+
+[Invite their thoughts]
+"Is there anything weighing on your mind that you want to talk through before we close this chapter?"
+
+[Listen — they may want to debrief]
+[Mirror their words. Withdrawals often come with relief and disappointment in the same breath. Let both exist.]
+
+[Close warmly]
+"Thank you for trusting me with this. You made the right call. Talk to you soon, [NAME]."`,
+    why: "Withdrawals are emotional even when they are the right decision. The email reframes the choice as strategic rather than as failure. The call lets the seller process. The line \"many sellers withdraw, regroup, and come back at a better moment\" gives them permission to feel okay about the decision. Keep the door open without being pushy — the future relationship matters more than the immediate fee."
+  },
+
+  {
+    stage: "operational",
+    num: "X3",
+    title: "Seller Has Raised a Concern",
+    desc: "The seller texted or emailed something at 9pm that needs a thoughtful written response, not a hasty one. The \"you raised something — here is how I am thinking about it\" template.",
+    tags: [
+      {
+        text: "Email Only",
+        cls: ""
+      },
+      {
+        text: "Response",
+        cls: ""
+      },
+      {
+        text: "Diplomatic",
+        cls: ""
+      }
+    ],
+    subject: "Re: [Seller's subject / \"Your note from last night\"]",
+    email: `Hi [NAME],
+
+Thank you for raising this. I wanted to take a few hours to think it through properly rather than reply immediately, because what you raised deserves a real answer, not a quick one.
+
+What I heard you saying
+[1-2 sentences mirroring back what they raised, in your own words. This is critical — it shows you understood, not just received.]
+
+How I am thinking about it
+[2-3 sentences. Honest, not defensive. If they raised a legitimate concern, name it. If they raised something based on incomplete information, gently fill in the missing context.]
+
+What I would suggest
+[1-2 specific actions or a proposed path forward. If the answer is "let's discuss in person," say so explicitly.]
+
+What I want you to know
+You raised this because you care about the outcome — and I am glad you raised it. I would much rather hear concerns directly from you than have you sitting with them. Always feel free to text or call any time.
+
+Happy to discuss further on the phone if that is easier — just let me know.
+
+Talk soon,
+Peter`,
+    why: "The 9pm text is one of the highest-stakes communications you will get from a seller — it is them at the end of a long day, surfacing an anxiety they have probably been carrying for a while. Replying instantly with a defensive answer is the worst move. The like is earned by taking the time to write a real response, mirroring their concern back accurately (\"what I heard you saying\"), and naming legitimate issues honestly. The line \"you raised this because you care — and I am glad you raised it\" reframes the concern as a positive contribution."
+  },
+
+  {
+    stage: "operational",
+    num: "X4",
+    title: "Holiday or Extended Absence Notification",
+    desc: "You are going to be away (vacation, conference, family event) for a few days. Most agents skip this — sellers notice when they get it, and notice harder when they do not.",
+    tags: [
+      {
+        text: "Email Only",
+        cls: ""
+      },
+      {
+        text: "Operational",
+        cls: ""
+      },
+      {
+        text: "Brief",
+        cls: ""
+      }
+    ],
+    subject: "[ADDRESS] — Heads Up: I Will Be [Away / Out of Office] [Dates]",
+    email: `Hi [NAME],
+
+Quick heads-up — I will be [away / out of office / at a conference] from [date] through [date].
+
+What this means for your listing
+• Showings continue normally — the buyer agents book through ShowingTime as usual
+• My team / [colleague's name and title] will cover anything urgent in my absence — they have full context on your file. Their direct number is [phone] and email is [email]
+• I will check email at least once daily and respond within [X] hours to anything time-sensitive
+• Anything that is not urgent will wait until I am back on [date]
+
+If an offer comes in or anything material happens
+Call or text me directly — I will absolutely take that call from wherever I am. An offer is not "wait until Monday" news.
+
+I will send the regular weekly update on schedule.
+
+Talk soon,
+Peter`,
+    why: "Sellers worry that when their agent is away, their listing gets ignored. Most agents either say nothing (worst) or send a generic out-of-office (almost as bad). The like is earned by being specific — who covers, what you will still respond to, what threshold (an offer) gets you on the phone from anywhere. The line \"an offer is not wait-until-Monday news\" is the one that builds trust."
+  }
+];
+
+const framework = [
+  { num: 1, title: 'The Numbers', tag: '60 seconds to read',
+    body: '<p>Open every update with the hard data: showings this week and total to date, online views and saves on Realtor.ca and HouseSigma, and any comparable activity in the area (new listings, sales).</p><p>Keep this section <strong>factual and short</strong>. It is not where the like is earned — it is where credibility is established. Bullet points, no commentary, no padding.</p>',
+    takeaway: 'Numbers earn trust by being honest. They do not earn likes. Move through them quickly so you can spend your space on the parts that do.' },
+  { num: 2, title: 'What the Feedback Is Telling Us', tag: 'Where most agents fail',
+    body: '<p>This is where most agents fail. They forward agent feedback as a list of quotes ("kitchen too small," "loved the layout") and leave the seller to interpret it. That is lazy and it makes the seller anxious.</p><p>Instead, <strong>synthesize the feedback into a pattern</strong>:</p>',
+    example: '"This week\'s three showings echoed what we heard last week — buyers are responding well to the layout and the natural light, and the most common hesitation is the bathroom. That\'s consistent and it tells us something useful for next week."',
+    takeaway: 'The seller does not want quotes. They want meaning. Synthesizing feedback into a pattern signals that you are actively thinking about their listing — not just forwarding emails.' },
+  { num: 3, title: 'What I Am Doing This Week', tag: 'The proactive section',
+    body: '<p>List <strong>three to five specific actions</strong> you have taken or will take. This is the most-skipped section in most agents\' updates and the one that earns the most likes.</p><p>Examples:</p><p style="margin-left: 16px;">• "Reposted the listing to my Mandarin WeChat network — 240 contacts"<br>• "Reached out to 4 buyer agents who toured similar homes nearby in the past 30 days"<br>• "Refreshed the listing photos sequence — leading with the kitchen now based on online click data"<br>• "Boosted the social media post for the listing on Saturday and Sunday"</p>',
+    takeaway: 'Sellers want to see effort. They cannot see the work you do behind the scenes unless you tell them. Telling them is not bragging — it is reporting. The agents who lose listings in slow markets are the ones who do plenty of work but never tell the seller about it.' },
+  { num: 4, title: 'My Read + What We Should Consider', tag: 'Become the consultant',
+    body: '<p>This is where you become the consultant — your professional identity. State your <strong>read on the market position</strong>, then offer one or two strategic options for the coming week.</p>',
+    example: '"My read: we\'re getting consistent interest and consistent feedback, but no one is moving to an offer yet. That usually means the home is priced just above where buyers are willing to commit. Two options for the coming week: we can hold and see if any of these buyers come back, or we can adjust by [$X] to push past the next price threshold on Realtor.ca search filters. I have a slight preference for option 2, and here\'s why — but the decision is yours."',
+    takeaway: 'You are treating them as a partner in strategy, not a passive recipient of news. You present options, share your view, but explicitly leave the choice with them. That is the calm-consultant identity your brand is built on.' },
+  { num: 5, title: 'One Human Line', tag: 'The line they remember',
+    body: '<p>Close with <strong>one sentence that is not business</strong>. It can be acknowledgment, forward-looking, or simply human:</p><p style="margin-left: 16px;">• <em>"I know the showing on Tuesday meant rearranging the kids\' schedule — thank you for being so flexible."</em><br>• <em>"I\'ll have the open house signs out by Saturday morning, weather permitting."</em><br>• <em>"Hope you got to enjoy the long weekend."</em></p><p>One line. Not a paragraph.</p>',
+    takeaway: 'This is what the seller actually remembers from the email. Numbers fade. The human moment stays.' }
+];
+
+const supportingNotes = [
+  { title: 'Format and Timing', cls: '',
+    content: '<p><strong>Channel:</strong> Email is best for the formal weekly update because it creates a paper trail the seller can reference. Pair it with a short text the same day: <em>"Just sent the weekly update to your inbox — let me know if you want to chat through any of it."</em> The text earns its own small like by signalling availability without demanding a response.</p><p><strong>Timing:</strong> Same day every week. Sunday evening or Monday morning works best — Sunday lets the weekend showings be included; Monday lets you reference what is coming this week. Pick one and stick with it. Inconsistency in timing tells the seller you are squeezing them in when you have time.</p><p><strong>Length:</strong> One screen on a phone. If they have to scroll, it is too long. The 5-part structure naturally fits in 200–300 words.</p>' },
+  { title: 'The Week-Three Pivot', cls: '',
+    content: '<p>Most listings that do not sell in the first two weeks need a strategy change in week three. The weekly update is the vehicle for that conversation — but only if you have been earning likes consistently in weeks one and two.</p><p>By week three, if showing volume is dropping and feedback has stabilized into a pattern, your update should explicitly raise the strategic question:</p><div class="quote">"We\'re at the natural inflection point of the listing period. I\'d like to come by this week to talk through three options — hold, refresh, or adjust price. None of them are wrong; they\'re just different ways to play the next stage. Can we find 30 minutes?"</div><p>Sellers who have been getting good weekly updates will say yes. Sellers who have been getting lazy weekly updates will start to mistrust the messenger right when you need them to trust you most.</p>' },
+  { title: 'A Note on Bad-News Weeks', cls: 'warning',
+    content: '<p>The hardest update to write is the week with zero showings. Most agents either skip the update entirely (worst move) or pad it with market commentary to disguise the silence (second-worst move). Both make the seller feel something is being hidden.</p><p>The right move is to send the update on schedule, lead with the honest number, and immediately pivot to what you are doing about it:</p><div class="quote">"Showings: 0 this week. That\'s quiet, and I want to address it head-on. Here\'s what I\'m doing this week to change that..."</div><p>The seller respects the directness. The like is earned by the courage to say "0" without flinching, paired with a clear plan.</p>' },
+  { title: 'The Underlying Principle', cls: 'signature',
+    content: '<p>The weekly update is not really about the showings.</p><p>It is about consistently demonstrating that <strong>you are still working on their listing as hard as you were on day one</strong>. Sellers worry that they become invisible to their agent after the listing goes live.</p><p>Your weekly update is the antidote.</p>' }
+];
+
+let currentFilter = 'all';
+let currentSearch = '';
+
+function matchesFilter(tpl) {
+  if (currentFilter === 'all') return true;
+  if (currentFilter === 'email') return !tpl.phone;
+  if (currentFilter === 'call') return !!tpl.phone;
+  return true;
+}
+
+function matchesSearch(tpl) {
+  if (!currentSearch) return true;
+  const q = currentSearch.toLowerCase();
+  const haystack = (tpl.title + ' ' + tpl.desc + ' ' + tpl.tags.map(t=>t.text).join(' ')).toLowerCase();
+  return haystack.includes(q);
+}
+
+function renderTemplates() {
+  const container = document.getElementById('templateSections');
+  container.innerHTML = '';
+  let totalShown = 0;
+
+  stages.forEach(stage => {
+    const stageTpls = templates.filter(t => t.stage === stage.id && matchesFilter(t) && matchesSearch(t));
+    if (stageTpls.length === 0) return;
+    totalShown += stageTpls.length;
+
+    const section = document.createElement('div');
+    section.innerHTML = `
+      <div class="section-header">
+        <h2>${escapeHtml(stage.title)}</h2>
+        <span class="count">${stageTpls.length} ${stageTpls.length === 1 ? 'template' : 'templates'}</span>
+      </div>
+      <p class="section-desc">${escapeHtml(stage.desc)}</p>
+      <div class="stage-templates"></div>
+    `;
+    container.appendChild(section);
+    const tplsContainer = section.querySelector('.stage-templates');
+    stageTpls.forEach(tpl => tplsContainer.appendChild(buildTemplateCard(tpl)));
+  });
+
+  document.getElementById('emptyResults').style.display = totalShown === 0 ? 'block' : 'none';
+}
+
+function buildTemplateCard(tpl) {
+  const card = document.createElement('div');
+  card.className = 'template';
+  const tagsHtml = tpl.tags.map(t => `<span class="tag ${t.cls}">${escapeHtml(t.text)}</span>`).join('');
+  let bodyHtml = `
+    <div class="block-label">Subject Line</div>
+    <div class="subject-block">${escapeHtml(tpl.subject)}</div>
+    <div class="block-label">Email Body</div>
+    <div class="email-block">${formatEmail(tpl.email)}</div>
+    <div class="copy-row">
+      <div class="why">Replace bracketed [fields] with the week's specifics before sending.</div>
+      <button class="btn-copy" data-action="copy-email" data-tpl="${tpl.num}">Copy Email</button>
+    </div>
+  `;
+
+  if (tpl.phone) {
+    bodyHtml += `
+      <div class="call-meta">
+        <div class="call-meta-item"><span class="lbl">Timing</span><span class="val">${escapeHtml(tpl.callMeta.timing)}</span></div>
+        <div class="call-meta-item"><span class="lbl">Length</span><span class="val">${escapeHtml(tpl.callMeta.length)}</span></div>
+        <div class="call-meta-item"><span class="lbl">Purpose</span><span class="val">${escapeHtml(tpl.callMeta.purpose)}</span></div>
+      </div>
+      <div class="block-label">Phone Conversation Script</div>
+      <div class="phone-block">${formatPhone(tpl.phone)}</div>
+      <div class="copy-row">
+        <div class="why">Use the bracketed [stage directions] to keep your pacing — do not read them aloud.</div>
+        <button class="btn-copy gold" data-action="copy-phone" data-tpl="${tpl.num}">Copy Phone Script</button>
+      </div>
+    `;
+  }
+
+  bodyHtml += `
+    <div class="why-works">
+      <strong>Why this works</strong>
+      ${escapeHtml(tpl.why)}
+    </div>
+  `;
+
+  card.innerHTML = `
+    <div class="template-head" data-action="toggle">
+      <div class="template-num">${tpl.num}</div>
+      <div class="template-info">
+        <div class="template-title">${escapeHtml(tpl.title)}</div>
+        <div class="template-desc">${escapeHtml(tpl.desc)}</div>
+        <div class="template-tags">${tagsHtml}</div>
+      </div>
+      <div class="template-arrow">›</div>
+    </div>
+    <div class="template-body">${bodyHtml}</div>
+  `;
+  return card;
+}
+
+function renderFramework() {
+  const container = document.getElementById('frameworkSections');
+  container.innerHTML = framework.map(part => `
+    <div class="framework-card">
+      <div class="framework-head">
+        <div class="framework-num">${part.num}</div>
+        <div class="framework-title">${escapeHtml(part.title)}</div>
+        <div class="framework-tag">${escapeHtml(part.tag)}</div>
+      </div>
+      <div class="framework-desc">${part.body}</div>
+      ${part.example ? `<div class="framework-example">${escapeHtml(part.example)}</div>` : ''}
+      <div class="framework-takeaway">
+        <strong>Why this earns the like</strong>
+        ${escapeHtml(part.takeaway)}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderSupportingNotes() {
+  const container = document.getElementById('supportingNotes');
+  container.innerHTML = supportingNotes.map(note => `
+    <div class="note-card ${note.cls}">
+      <h3>${escapeHtml(note.title)}</h3>
+      ${note.content}
+    </div>
+  `).join('');
+}
+
+document.addEventListener('click', (e) => {
+  const action = e.target.closest('[data-action]');
+  if (!action) return;
+  const type = action.dataset.action;
+  if (type === 'toggle') action.closest('.template').classList.toggle('expanded');
+  if (type === 'copy-email') {
+    const num = action.dataset.tpl;
+    const tpl = templates.find(t => t.num === num);
+    if (!tpl) return;
+    copyText(`Subject: ${applyAddress(tpl.subject)}\n\n${applyAddress(tpl.email)}`, action);
+  }
+  if (type === 'copy-phone') {
+    const num = action.dataset.tpl;
+    const tpl = templates.find(t => t.num === num);
+    if (!tpl || !tpl.phone) return;
+    copyText(applyAddress(tpl.phone), action);
+  }
+});
+
+document.getElementById('filterPills').addEventListener('click', (e) => {
+  const pill = e.target.closest('.pill');
+  if (!pill) return;
+  document.querySelectorAll('.pill').forEach(p => p.classList.toggle('active', p === pill));
+  currentFilter = pill.dataset.filter;
+  renderTemplates();
+});
+
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  currentSearch = e.target.value.trim();
+  renderTemplates();
+});
+
+async function initAddress() {
+  const saved = await getSetting('lastAddress');
+  if (saved) {
+    document.getElementById('address').value = saved;
+    document.getElementById('lastUsed').textContent = '(remembered)';
+  }
+  document.getElementById('address').addEventListener('input', async (e) => {
+    await saveSetting('lastAddress', e.target.value.trim());
+    document.getElementById('lastUsed').textContent = e.target.value.trim() ? '(saved)' : '';
+  });
+}
+
+async function init() {
+  try { await openDB(); await initAddress(); }
+  catch (err) { console.error('IndexedDB unavailable:', err); }
+  renderTemplates();
+  renderFramework();
+  renderSupportingNotes();
+}
+init();
+</script>
+</body>
+</html>

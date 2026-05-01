@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Weekly Seller Communication — Pinnacle Listing System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1B2A4E;
+  --navy-soft: #2D3F66;
+  --navy-faint: #E8ECF3;
+  --gold: #B08D3C;
+  --gold-soft: #C9A856;
+  --gold-faint: #F7F1E1;
+  --ink: #1A1A1A;
+  --ink-soft: #555555;
+  --ink-faint: #999999;
+  --paper: #FAFAF7;
+  --card: #FFFFFF;
+  --border: #E5E5E0;
+  --green: #5F8A4E;
+  --green-faint: #EDF3E9;
+  --red: #B85450;
+  --red-faint: #FCEEED;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.app {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 24px 20px 80px;
+}
+
+/* ===================== HEADER ===================== */
+.header {
+  text-align: center;
+  padding: 16px 0 28px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 28px;
+}
+
+.brand {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.header h1 {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.header .sub {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin-top: 6px;
+  font-style: italic;
+}
+
+/* ===================== LISTING BAR ===================== */
+.listing-bar {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 24px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.listing-bar label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.listing-bar input {
+  flex: 1;
+  min-width: 200px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.listing-bar input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.listing-bar .last-used {
+  font-size: 12px;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* ===================== GROUP HEADERS ===================== */
+.group-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 28px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--navy);
+}
+
+.group-header:first-of-type { margin-top: 8px; }
+
+.group-header h2 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.group-header .badge {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: white;
+  background: var(--navy);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.group-header.call .badge { background: var(--gold); }
+
+/* ===================== TEMPLATE CARDS ===================== */
+.template {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(27, 42, 78, 0.04);
+  transition: box-shadow 0.2s ease;
+}
+
+.template:hover { box-shadow: 0 2px 8px rgba(27, 42, 78, 0.08); }
+
+.template-head {
+  padding: 18px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  user-select: none;
+}
+
+.template-head:hover { background: var(--navy-faint); }
+
+.template-num {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  margin-top: 2px;
+  min-width: 28px;
+}
+
+.template-info { flex: 1; }
+
+.template-title {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.template-desc {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.template-tags {
+  margin-top: 8px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: var(--navy-faint);
+  color: var(--navy);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.tag.call {
+  background: var(--gold-faint);
+  color: var(--gold);
+}
+
+.tag.green {
+  background: var(--green-faint);
+  color: var(--green);
+}
+
+.tag.red {
+  background: var(--red-faint);
+  color: var(--red);
+}
+
+.template-arrow {
+  font-size: 20px;
+  color: var(--ink-faint);
+  transition: transform 0.2s ease;
+  margin-top: 4px;
+}
+
+.template.expanded .template-arrow {
+  transform: rotate(90deg);
+  color: var(--gold);
+}
+
+.template-body {
+  display: none;
+  padding: 0 20px 20px;
+  border-top: 1px solid var(--border);
+  margin-top: -1px;
+}
+
+.template.expanded .template-body { display: block; }
+
+/* ===================== CONTENT BLOCKS ===================== */
+.block-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin: 18px 0 8px;
+}
+
+.subject-block {
+  background: var(--gold-faint);
+  border-left: 3px solid var(--gold);
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--navy);
+}
+
+.email-block, .phone-block {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  white-space: pre-wrap;
+  font-family: var(--sans);
+}
+
+.phone-block {
+  background: #FFF9EE;
+  border-color: #E8D9A8;
+}
+
+.email-block strong, .phone-block strong {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.field-tag {
+  background: rgba(176, 141, 60, 0.12);
+  color: var(--gold);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+  font-family: 'DM Sans', monospace;
+  font-size: 13px;
+}
+
+.copy-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  gap: 10px;
+}
+
+.copy-row .why {
+  font-size: 12px;
+  color: var(--ink-soft);
+  font-style: italic;
+  flex: 1;
+}
+
+.btn-copy {
+  background: var(--navy);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-copy:hover { background: var(--navy-soft); }
+.btn-copy.copied { background: var(--green); }
+
+.btn-copy.gold { background: var(--gold); }
+.btn-copy.gold:hover { background: var(--gold-soft); }
+
+/* ===================== WHY THIS WORKS ===================== */
+.why-works {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--navy-faint);
+  border-left: 3px solid var(--navy);
+  border-radius: 4px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.why-works strong {
+  color: var(--navy);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ===================== CALL GUIDANCE ===================== */
+.call-meta {
+  background: var(--gold-faint);
+  border: 1px solid #E8D9A8;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 16px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+
+.call-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.call-meta-item .lbl {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.call-meta-item .val {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+/* ===================== UNIVERSAL PRINCIPLES ===================== */
+.principles {
+  margin-top: 32px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.principles h3 {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+
+.principles ul { list-style: none; }
+
+.principles li {
+  padding: 8px 0 8px 18px;
+  position: relative;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink);
+  border-bottom: 1px solid var(--border);
+}
+
+.principles li:last-child { border-bottom: none; }
+
+.principles li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 16px;
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+/* ===================== FRAMEWORK SECTIONS ===================== */
+.framework-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 14px;
+  padding: 22px 24px;
+  box-shadow: 0 1px 3px rgba(27, 42, 78, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.framework-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--gold);
+}
+
+.framework-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.framework-num {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  min-width: 36px;
+}
+
+.framework-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--navy);
+  flex: 1;
+}
+
+.framework-tag {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  background: var(--gold-faint);
+  padding: 4px 10px;
+  border-radius: 10px;
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.framework-desc {
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.framework-desc p { margin-bottom: 10px; }
+.framework-desc p:last-child { margin-bottom: 0; }
+
+.framework-example {
+  background: var(--gold-faint);
+  border-left: 3px solid var(--gold);
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--ink);
+  font-style: italic;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.framework-takeaway {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: var(--navy-faint);
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+.framework-takeaway strong {
+  color: var(--navy);
+  font-weight: 700;
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+/* ===================== SUPPORTING NOTES ===================== */
+.note-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 3px rgba(27, 42, 78, 0.04);
+}
+
+.note-card h3 {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--navy);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.note-card h3::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+
+.note-card p {
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.note-card p:last-child { margin-bottom: 0; }
+
+.note-card .quote {
+  background: var(--paper);
+  border-left: 3px solid var(--navy);
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: var(--ink);
+  font-style: italic;
+  line-height: 1.55;
+  margin: 8px 0;
+}
+
+.note-card.warning {
+  background: linear-gradient(to right, var(--gold-faint), var(--card));
+  border-color: #E8D9A8;
+}
+
+.note-card.signature {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%);
+  color: white;
+  border-color: var(--navy);
+}
+
+.note-card.signature h3 { color: white; }
+.note-card.signature h3::before { background: var(--gold-soft); }
+.note-card.signature p { color: rgba(255, 255, 255, 0.92); }
+.note-card.signature .quote {
+  background: rgba(0, 0, 0, 0.18);
+  border-left-color: var(--gold-soft);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* ===================== TOAST ===================== */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(120px);
+  background: var(--navy);
+  color: white;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 6px 18px rgba(27, 42, 78, 0.35);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 200;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ===================== MOBILE ===================== */
+@media (max-width: 560px) {
+  .app { padding: 16px 14px 80px; }
+  .header h1 { font-size: 24px; }
+  .group-header h2 { font-size: 18px; }
+  .template-head { padding: 14px 16px; gap: 10px; }
+  .template-title { font-size: 17px; }
+  .template-num { font-size: 18px; min-width: 22px; }
+  .template-body { padding: 0 16px 16px; }
+  .copy-row { flex-direction: column; align-items: stretch; }
+  .copy-row .why { order: 2; }
+  .listing-bar { flex-direction: column; align-items: stretch; }
+  .listing-bar input { min-width: 0; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ============= HEADER ============= -->
+  <header class="header">
+    <div class="brand">Pinnacle Listing System</div>
+    <h1>Weekly Seller Communication</h1>
+    <div class="sub">Six templates — pick the situation, copy the email, run the call</div>
+  </header>
+
+  <!-- ============= LISTING BAR ============= -->
+  <div class="listing-bar">
+    <label for="address">Listing</label>
+    <input type="text" id="address" placeholder="e.g., 123 Maple Street, Toronto">
+    <span class="last-used" id="lastUsed"></span>
+  </div>
+
+  <!-- ============= EMAIL ONLY GROUP ============= -->
+  <div class="group-header">
+    <h2>Email Only</h2>
+    <span class="badge">3 templates</span>
+  </div>
+  <p style="font-size: 13px; color: var(--ink-soft); margin-bottom: 14px; line-height: 1.5;">
+    Routine and positive updates. Email does the job. Pair with a short same-day text: <em>"Just sent the weekly update — let me know if you want to chat through any of it."</em>
+  </p>
+
+  <div id="emailOnlyTemplates"></div>
+
+  <!-- ============= EMAIL + CALL GROUP ============= -->
+  <div class="group-header call">
+    <h2>Email + Call</h2>
+    <span class="badge">3 templates</span>
+  </div>
+  <p style="font-size: 13px; color: var(--ink-soft); margin-bottom: 14px; line-height: 1.5;">
+    The seller needs to hear your voice — for reassurance, for a decision, or to land an emotional moment. Email first (creates the record), then call (delivers the warmth).
+  </p>
+
+  <div id="emailCallTemplates"></div>
+
+  <!-- ============= THE 5-PART FRAMEWORK ============= -->
+  <div class="group-header" style="margin-top: 40px;">
+    <h2>The 5-Part Framework</h2>
+    <span class="badge">Why every template works</span>
+  </div>
+  <p style="font-size: 13px; color: var(--ink-soft); margin-bottom: 14px; line-height: 1.5;">
+    Every template above follows the same skeleton. The substance changes; the structure does not. Understanding the <em>why</em> behind each part is what lets you adapt confidently when a real listing throws something the templates do not anticipate.
+  </p>
+
+  <div id="frameworkSections"></div>
+
+  <!-- ============= TIMING, BAD NEWS, GUIDING PRINCIPLE ============= -->
+  <div class="card-section" id="supportingNotes"></div>
+
+  <!-- ============= UNIVERSAL PRINCIPLES ============= -->
+  <div class="principles">
+    <h3>Universal Principles</h3>
+    <ul>
+      <li><strong>Same day every week.</strong> Sunday evening or Monday morning. Predictability earns trust.</li>
+      <li><strong>Always include the numbers.</strong> Never hide bad ones. Sellers detect padding instantly.</li>
+      <li><strong>Always synthesize feedback into a pattern.</strong> Never just forward agent comments.</li>
+      <li><strong>Always list specific actions.</strong> Sellers cannot see invisible work — name it.</li>
+      <li><strong>Always close with one human line.</strong> The numbers fade. The human moment stays.</li>
+      <li><strong>Calls should feel like they have a reason.</strong> Reserve them for moments that benefit from voice — overusing them burns out the channel.</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// IndexedDB — remembers the listing address
+// ============================================================
+const DB_NAME = 'PinnacleSellerComms';
+const DB_VERSION = 1;
+let db = null;
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = (e) => {
+      const d = e.target.result;
+      if (!d.objectStoreNames.contains('settings')) {
+        d.createObjectStore('settings', { keyPath: 'key' });
+      }
+    };
+    req.onsuccess = (e) => { db = e.target.result; resolve(db); };
+    req.onerror = (e) => reject(e.target.error);
+  });
+}
+
+function saveSetting(key, value) {
+  return new Promise((resolve, reject) => {
+    const r = db.transaction('settings', 'readwrite').objectStore('settings').put({ key, value });
+    r.onsuccess = () => resolve();
+    r.onerror = () => reject(r.error);
+  });
+}
+
+function getSetting(key) {
+  return new Promise((resolve, reject) => {
+    const r = db.transaction('settings').objectStore('settings').get(key);
+    r.onsuccess = () => resolve(r.result ? r.result.value : null);
+    r.onerror = () => reject(r.error);
+  });
+}
+
+// ============================================================
+// Toast
+// ============================================================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ============================================================
+// Copy to clipboard (with HTML field-tag → plain text conversion)
+// ============================================================
+function copyText(text, btn) {
+  // Strip HTML wrapping but keep the content
+  const tmp = document.createElement('div');
+  tmp.innerHTML = text;
+  const plain = tmp.textContent || tmp.innerText || '';
+
+  navigator.clipboard.writeText(plain).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = orig;
+      btn.classList.remove('copied');
+    }, 1800);
+  }).catch(() => {
+    showToast('Copy failed — try selecting manually');
+  });
+}
+
+// ============================================================
+// Templates Data
+// ============================================================
+const templates = [
+  // ============ EMAIL ONLY ============
+  {
+    group: 'email',
+    num: 1,
+    title: 'Strong Launch',
+    desc: 'Week 1, healthy showing volume (4+ showings), positive feedback, the home is performing as expected.',
+    tags: [
+      { text: 'Week 1', cls: '' },
+      { text: 'Positive', cls: 'green' }
+    ],
+    subject: '[ADDRESS] — Week 1 Update: Strong Start',
+    email: `Hi [NAME],
+
+A quick recap of our first week on the market — overall, we are off to a strong start.
+
+The numbers
+• Showings this week: [X]
+• Online views on Realtor.ca: [X]
+• Saves / favourites: [X]
+• New comparable listings in the area: [X]
+
+What the feedback is telling us
+The early showings are echoing what we hoped — buyers are responding well to [the kitchen / the natural light / the layout / the lot]. The most common comment so far has been [insert pattern]. That tells me our positioning is landing the way we planned.
+
+What I am doing this week
+• Reposting the listing across my Mandarin WeChat network ([X] contacts)
+• Following up personally with the [X] buyer agents who toured this past week
+• Boosting the listing's social media post over the weekend
+• Reaching out to agents who have shown comparable homes in the past 30 days
+
+My read
+We are exactly where I would want to be at the end of week 1. The showing pace and the consistency of the feedback both tell me the price is right and the home is presenting well. I expect we will see at least one serious offer-stage conversation this week.
+
+One last note
+Thank you for keeping the home so showing-ready this week — I know that is a lot of work with [the kids / the dog / your schedule]. It is paying off in the feedback.
+
+Talk soon,
+Peter`,
+    why: 'Confidence is the like-earning currency in week 1. Sellers are anxious during launch — they need to feel that you are calm, in control, and that the plan is working. The acknowledgment of their effort at the end (kids/dog/schedule) is the human moment that makes the email memorable.'
+  },
+
+  {
+    group: 'email',
+    num: 2,
+    title: 'Slow Start, No Offers Yet',
+    desc: 'Decent showing volume (2–4 per week) but no offers. Feedback is mixed. The seller is starting to wonder if something is wrong.',
+    tags: [
+      { text: 'Week 1–2', cls: '' },
+      { text: 'Steady', cls: '' }
+    ],
+    subject: '[ADDRESS] — Week [X] Update: Steady Activity, Reading the Room',
+    email: `Hi [NAME],
+
+Here is where we stand at the end of week [X]. The activity is steady but not yet at the offer stage — let me walk you through what I am seeing and what we are doing about it.
+
+The numbers
+• Showings this week: [X] (total to date: [X])
+• Online views: [X]
+• Saves: [X]
+• New comparable listings nearby: [X]
+• Comparable sales nearby: [X]
+
+What the feedback is telling us
+Two patterns are emerging from the showings. First, buyers are consistently responding well to [feature]. Second, the most common hesitation has been [insert pattern — bathroom / basement / price relative to comparable]. That second pattern is the one I am paying close attention to, because it tells us where buyers are getting stuck.
+
+What I am doing this week
+• Personally calling the [X] buyer agents who showed without bringing back an offer, to understand the hesitation in more depth than the written feedback captures
+• Refreshing the photo sequence on Realtor.ca to lead with [feature] based on what is resonating
+• Pushing the listing through my Mandarin network with refreshed copy
+• Watching the new comparable listings closely to see if any of them sell or sit
+
+My read
+We are at the normal inflection point for this kind of listing. Decent traffic without offers usually means one of three things: the price is just above where buyers are willing to commit, the photos are not pulling the right buyer, or the market is genuinely slower this month than last. I think it is mostly the third right now, but I want one more week of data before I would suggest any change to our strategy.
+
+One last note
+If you are starting to feel impatient — that is a normal feeling at this stage and you are not alone in it. We have time and we have a plan. I will have a clearer recommendation by next week's update.
+
+Talk soon,
+Peter`,
+    why: 'This is the hardest update to write well — and the one most agents do badly. The like is earned by naming the seller\'s anxiety before they raise it ("if you are starting to feel impatient"), being honest about what you do not yet know, and refusing to offer a panicked solution before you have the data. Calm consultant, not panicked salesperson.'
+  },
+
+  {
+    group: 'email',
+    num: 3,
+    title: 'Mid-Listing Steady (Weeks 4+)',
+    desc: 'Listing has been on the market 4+ weeks, activity continues at a normal pace, no major changes needed. Keep the rhythm so the seller never wonders if you have moved on.',
+    tags: [
+      { text: 'Week 4+', cls: '' },
+      { text: 'Maintenance', cls: '' }
+    ],
+    subject: '[ADDRESS] — Week [X] Update: Holding the Course',
+    email: `Hi [NAME],
+
+Here is where we are at the end of week [X]. Nothing dramatic to report — which in this market is a good thing. We are holding the course.
+
+The numbers
+• Showings this week: [X] (total to date: [X])
+• Online views: [X] (running [X] per week average)
+• Saves: [X]
+• New comparable listings nearby: [X]
+• Comparable sales nearby this week: [X]
+
+What the feedback is telling us
+The feedback has been consistent for [X] weeks now — buyers continue to respond well to [feature], and the most common hesitation remains [hesitation]. That consistency is actually useful information: it tells us the listing is reaching the right buyer pool, and the deal that closes will most likely come from a buyer who is comfortable with [hesitation].
+
+What I am doing this week
+• Continuing personal outreach to buyer agents who shop in this price range — [X] new agents this week
+• Refreshing my Mandarin and English network posts so the listing stays in front of new buyers
+• Tracking comparable listings and sales for any signal worth acting on
+• [Specific action — e.g., open house, broker's open, targeted social post]
+
+My read
+Listings at this stage typically close in one of two ways: a buyer who saw it earlier comes back with a stronger offer, or a new buyer enters the market. Both happen. The work right now is keeping the listing visible and well-supported until one of those buyers shows up. We are doing exactly that.
+
+One last note
+I know weeks like this can feel like nothing is happening — but real work is happening behind the scenes, and consistency is what eventually produces the offer. Thank you for staying patient. I will keep you closely updated.
+
+Talk soon,
+Peter`,
+    why: 'The middle weeks of a listing are where most agents go quiet — and where most sellers start to lose confidence. The like is earned by sending the update anyway, even when there is "nothing dramatic" to report. The line "consistency is what eventually produces the offer" gives the seller a useful frame for their patience instead of just asking them to be patient.'
+  },
+
+  // ============ EMAIL + CALL ============
+  {
+    group: 'call',
+    num: 4,
+    title: 'Quiet Week (Few or Zero Showings)',
+    desc: 'Almost no showings this week. The update most agents skip — which is exactly when sellers start to lose trust. Send the email, then follow with a reassurance call.',
+    tags: [
+      { text: 'Quiet Week', cls: 'red' },
+      { text: 'Reassurance Call', cls: 'call' }
+    ],
+    callMeta: {
+      timing: 'Within 24 hours of email',
+      length: '~5 minutes',
+      purpose: 'Reassurance, not repeat'
+    },
+    subject: '[ADDRESS] — Week [X] Update: Quiet Week, Here is My Plan',
+    email: `Hi [NAME],
+
+This week was quiet. I want to address that head-on rather than dress it up, and walk you through what I am doing about it.
+
+The numbers
+• Showings this week: [0 / 1]
+• Online views: [X] (compared to [X] last week)
+• Saves: [X]
+• New comparable listings: [X]
+
+What I think is happening
+Quiet weeks happen for two reasons: market timing, or listing fatigue (buyers who saw it in the first two weeks have moved on, and we are waiting for new buyers to enter the market). Right now I think it is mostly [reason] — and here is what tells me that: [evidence].
+
+What I am doing this week to change the trajectory
+• [Specific action 1 — e.g., refreshing the listing photos and copy]
+• [Specific action 2 — e.g., a fresh push through my Mandarin and English networks]
+• [Specific action 3 — e.g., personally calling 10 buyer agents who shop in this price range]
+• [Specific action 4 — e.g., scheduling an open house this Saturday]
+
+My read
+One quiet week is data, not a verdict. I want to see how this week's actions move the needle before I make any bigger recommendations. If next week is also quiet, I will come to you with a clear set of options to consider — including price, photos, and timing. We are not there yet, but I want you to know I am thinking ahead.
+
+One last note
+I know quiet weeks are stressful. They are stressful for me too, because I want this home sold for you. You are not invisible to me, and I am not coasting. I will give you a quick call later today as well.
+
+Talk soon,
+Peter`,
+    phone: `[Opening]
+"Hi [NAME] — is now still a good time? I just wanted to follow up on the email I sent."
+
+[Acknowledge, do not repeat]
+"I know a quiet week can feel discouraging. The email has all the data — I am not going to walk through it again. I just wanted you to hear my voice on this, because numbers in writing can feel colder than they really are."
+
+[The reassurance — the actual purpose of the call]
+"I want you to know I am thinking about your listing constantly. The plan is the plan, and I am working it. Quiet weeks happen, and one of them is not a verdict on the home or on us. The next week or two of activity will tell us a lot."
+
+[Invite, do not push]
+"Is there anything you have been wondering about that you did not want to put in writing? Anything I can clear up for you?"
+
+[Listen — let them talk]
+[Mirror one specific word they use. Pause longer than feels natural after they finish. Ask one follow-up question before pivoting.]
+
+[Close]
+"Thanks for picking up, [NAME]. I will be in touch again with the next update — and if anything changes during the week, you will hear from me before then."`,
+    why: 'The seller\'s secret fear during a quiet week is that you have stopped working on their listing. The email gives them the data and the plan; the call gives them the reassurance — which is what they actually need. Keep the call short. Its purpose is not to repeat the email, but to let them hear your voice and ask whatever they could not ask in writing. The line "you are not invisible to me" lands harder said out loud than read on a screen.'
+  },
+
+  {
+    group: 'call',
+    num: 5,
+    title: 'Week 3 Pivot — Time to Talk Strategy',
+    desc: 'Two to three weeks in, no offer yet. Time for the strategy meeting. The email lays out the three options. The call schedules the in-person meeting — never debate the options on the phone.',
+    tags: [
+      { text: 'Week 3', cls: '' },
+      { text: 'Schedule Meeting Call', cls: 'call' }
+    ],
+    callMeta: {
+      timing: 'Same day as email or next morning',
+      length: '~3 minutes',
+      purpose: 'Schedule the in-person meeting'
+    },
+    subject: '[ADDRESS] — Week 3 Update: Time to Talk Strategy',
+    email: `Hi [NAME],
+
+We are at the three-week mark, which is the natural point in any listing where I sit down with my sellers and walk through where we are and where to go from here. I would like to do that with you this week.
+
+The numbers to date
+• Total showings: [X]
+• Total online views: [X]
+• Saves: [X]
+• Comparable listings that have sold since we listed: [X]
+• Comparable listings still on the market: [X]
+
+What the cumulative feedback is telling us
+Across [X] showings, the pattern has settled. Buyers respond well to [feature], and the consistent hesitation has been [hesitation]. That hesitation has not changed across the listing period — which means it is not random, it is structural, and it is something we should now factor into our next-stage plan.
+
+The three options I want to walk through with you
+1. HOLD — Stay the course one more week. Reasonable if we have any active buyer interest still in motion.
+2. REFRESH — Update the photos, copy, and possibly the staging without changing price. Resets the listing for buyers who saw it in week 1.
+3. ADJUST — A strategic price adjustment to move past the next price-filter threshold on Realtor.ca. The most aggressive option, but in the current market it is also the most reliable.
+
+None of these are wrong. They are just different ways to play the next stage, and the right answer depends on your timeline and your comfort. I have a recommendation, but I want to hear your thinking first.
+
+Can we find 30 minutes this week?
+I would prefer to do this in person at the home, or over coffee if that is easier. Would [day] at [time] or [day] at [time] work for you? Either I can come to you, or we can meet at [neutral location].
+
+One last note
+This conversation is not a sign of failure — it is a sign that we are professionals who adjust our plan based on what the market is telling us. Most listings need at least one strategy refinement, and the ones that sell well are the ones whose agents had the courage to have this conversation honestly and on time.
+
+I will give you a quick call to find a time that works.
+
+Talk soon,
+Peter`,
+    phone: `[Opening]
+"Hi [NAME] — is now still a good time? I just sent you the week 3 update by email. I am not going to walk through it on the phone — I want you to read it on your own time and sit with it. I am calling for one reason only: to find a time this week to sit down together."
+
+[Frame the meeting — keep it light, not heavy]
+"This is a normal conversation that happens with every listing around the three-week mark. It is not bad news. There is nothing to dread. I want to walk through three options with you and figure out together what makes sense for the next stage."
+
+[Offer concrete times]
+"I have [day] at [time] or [day] at [time] open this week. Either I can come to the house, or we can meet at [coffee shop near them]. Which works better for you?"
+
+[If they want to discuss on the phone]
+"I would much rather do this in person. The conversation is easier when we can look at the comparable data together and you can ask me anything that comes up. Twenty or thirty minutes is all we need."
+
+[If they sound worried]
+"I know the email mentioned a price adjustment as one option — please do not let that worry you. It is one of three options, and we will only do it if it makes sense for you. The whole point of the meeting is to look at the options together, not for me to push you into one."
+
+[Confirm and close]
+"[Day] at [time] then. I will [come to the house / see you at the coffee shop]. Thanks, [NAME] — I will see you then."`,
+    why: 'This is the most important email you will write during the listing period — and the call has one job, which is to schedule the meeting. Sellers who try to make big decisions on the phone often regret them later. The in-person meeting is where the decision actually happens. Keep the call short. The line "this is a normal conversation that happens with every listing around the three-week mark" is the one that takes the dread out of it.'
+  },
+
+  {
+    group: 'call',
+    num: 6,
+    title: 'Post Price Reduction',
+    desc: 'A price reduction has just gone live (typically week 3 or 4). The seller is in a vulnerable emotional state — relief mixed with disappointment. The email shows the early data; the call delivers the warmth.',
+    tags: [
+      { text: 'After Reduction', cls: '' },
+      { text: 'Reinforcement Call', cls: 'call' }
+    ],
+    callMeta: {
+      timing: 'Same day as email',
+      length: '~5 minutes',
+      purpose: 'Reinforce the strategy is working'
+    },
+    subject: '[ADDRESS] — Update: Strong Response to the Price Adjustment',
+    email: `Hi [NAME],
+
+Quick update on how the listing is responding since we adjusted the price on [date]. The early signal is encouraging.
+
+The numbers since the adjustment
+• New showings booked: [X] (compared to [X] in the equivalent period before)
+• Online views since the adjustment: [X] (a [X]% increase)
+• New saves: [X]
+• Buyer agents who have re-engaged after seeing the adjustment: [X]
+
+What this is telling us
+The adjustment moved the listing past the [price] filter on Realtor.ca, which is exactly the threshold we wanted to clear. The increase in views and showings is the standard response when a listing crosses a price-filter boundary — buyers who never saw the listing before are now seeing it for the first time. This is the strategy working as designed.
+
+What I am doing this week
+• Personally calling every buyer agent who showed before the adjustment, to make sure they know about it
+• Pushing the adjusted listing back through my Mandarin and English networks with fresh copy
+• Hosting [an open house / a broker's open / a private showing event] this Saturday
+• Preparing for offer conversations — I expect at least one this week
+
+My read
+We made the right call, and the market is confirming it. What I want you to know is that the goal was never just "lower price" — it was "get past the threshold where the next group of buyers is searching." That has happened. Now the work shifts to converting the new attention into an offer, which is what I am focused on this week.
+
+One last note
+I know the price conversation last week was not an easy one. Thank you for trusting me with the recommendation. The numbers above are the early proof that the strategy is working — and I will keep you closely updated as the offer conversations develop.
+
+I will give you a quick call later today as well.
+
+Talk soon,
+Peter`,
+    phone: `[Opening]
+"Hi [NAME] — is now still a good time? I sent the update email a few hours ago. I wanted to follow up by phone so you could hear the news from me directly."
+
+[Lead with the good news]
+"The early numbers are tracking exactly how I expected. The adjustment did its job — we are seeing more showings booked, more views, and buyer agents who never engaged before are reaching out for the first time. That is the strategy working as designed."
+
+[Acknowledge the emotional weight — this is the heart of the call]
+"I want to acknowledge something. Last week's price conversation was not easy. I know that. Thank you for trusting me with the recommendation. It takes a lot to make that call, and you made the right one — the market is confirming it now."
+
+[Forward-looking]
+"My focus this week is converting the new attention into an offer. I am personally calling every buyer agent who showed before the adjustment, and I am preparing for offer conversations. I expect at least one this week."
+
+[Invite questions]
+"Is there anything you want to ask, or anything that is on your mind that we should talk through?"
+
+[Listen — let them respond]
+[They may share relief, or lingering disappointment, or both. Mirror their actual words. Do not rush to fill silence.]
+
+[Close]
+"Thank you, [NAME]. You will hear from me the moment anything material happens this week. Talk to you soon."`,
+    why: 'After a price reduction, the seller often feels a mix of relief and disappointment. The email reframes the reduction as a strategic success ("the strategy working as designed"). The call delivers something the email cannot: tone, warmth, and the audible reassurance that you remember the emotional weight of last week\'s decision. The line "thank you for trusting me with the recommendation" is the one to deliver out loud, slowly. It is the moment that earns back any like the price conversation may have temporarily cost you.'
+  }
+];
+
+// ============================================================
+// Render Templates
+// ============================================================
+function renderTemplates() {
+  const emailContainer = document.getElementById('emailOnlyTemplates');
+  const callContainer = document.getElementById('emailCallTemplates');
+
+  emailContainer.innerHTML = '';
+  callContainer.innerHTML = '';
+
+  templates.forEach((tpl, idx) => {
+    const card = document.createElement('div');
+    card.className = 'template';
+    card.dataset.idx = idx;
+
+    const tagsHtml = tpl.tags.map(t => `<span class="tag ${t.cls}">${escapeHtml(t.text)}</span>`).join('');
+
+    let bodyHtml = `
+      <div class="block-label">Subject Line</div>
+      <div class="subject-block">${escapeHtml(tpl.subject)}</div>
+
+      <div class="block-label">Email Body</div>
+      <div class="email-block" id="email-${idx}">${formatEmail(tpl.email)}</div>
+      <div class="copy-row">
+        <div class="why">Replace bracketed [fields] with the week's specifics before sending.</div>
+        <button class="btn-copy" data-action="copy-email" data-idx="${idx}">Copy Email</button>
+      </div>
+    `;
+
+    if (tpl.phone) {
+      bodyHtml += `
+        <div class="call-meta">
+          <div class="call-meta-item">
+            <span class="lbl">Timing</span>
+            <span class="val">${escapeHtml(tpl.callMeta.timing)}</span>
+          </div>
+          <div class="call-meta-item">
+            <span class="lbl">Length</span>
+            <span class="val">${escapeHtml(tpl.callMeta.length)}</span>
+          </div>
+          <div class="call-meta-item">
+            <span class="lbl">Purpose</span>
+            <span class="val">${escapeHtml(tpl.callMeta.purpose)}</span>
+          </div>
+        </div>
+
+        <div class="block-label">Phone Conversation Script</div>
+        <div class="phone-block" id="phone-${idx}">${formatPhone(tpl.phone)}</div>
+        <div class="copy-row">
+          <div class="why">Use the bracketed [stage directions] to keep your pacing — do not read them aloud.</div>
+          <button class="btn-copy gold" data-action="copy-phone" data-idx="${idx}">Copy Phone Script</button>
+        </div>
+      `;
+    }
+
+    bodyHtml += `
+      <div class="why-works">
+        <strong>Why this works</strong>
+        ${escapeHtml(tpl.why)}
+      </div>
+    `;
+
+    card.innerHTML = `
+      <div class="template-head" data-action="toggle">
+        <div class="template-num">${tpl.num}</div>
+        <div class="template-info">
+          <div class="template-title">${escapeHtml(tpl.title)}</div>
+          <div class="template-desc">${escapeHtml(tpl.desc)}</div>
+          <div class="template-tags">${tagsHtml}</div>
+        </div>
+        <div class="template-arrow">›</div>
+      </div>
+      <div class="template-body">${bodyHtml}</div>
+    `;
+
+    if (tpl.group === 'email') {
+      emailContainer.appendChild(card);
+    } else {
+      callContainer.appendChild(card);
+    }
+  });
+}
+
+// ============================================================
+// The 5-Part Framework Data
+// ============================================================
+const framework = [
+  {
+    num: 1,
+    title: 'The Numbers',
+    tag: '60 seconds to read',
+    body: `<p>Open every update with the hard data: showings this week and total to date, online views and saves on Realtor.ca and HouseSigma, and any comparable activity in the area (new listings, sales).</p>
+           <p>Keep this section <strong>factual and short</strong>. It is not where the like is earned — it is where credibility is established. Bullet points, no commentary, no padding.</p>`,
+    takeaway: 'Numbers earn trust by being honest. They do not earn likes. Move through them quickly so you can spend your space on the parts that do.'
+  },
+  {
+    num: 2,
+    title: 'What the Feedback Is Telling Us',
+    tag: 'Where most agents fail',
+    body: `<p>This is where most agents fail. They forward agent feedback as a list of quotes ("kitchen too small," "loved the layout") and leave the seller to interpret it. That is lazy and it makes the seller anxious.</p>
+           <p>Instead, <strong>synthesize the feedback into a pattern</strong>:</p>`,
+    example: `"This week's three showings echoed what we heard last week — buyers are responding well to the layout and the natural light, and the most common hesitation is the bathroom. That's consistent and it tells us something useful for next week."`,
+    takeaway: 'The seller does not want quotes. They want meaning. Synthesizing feedback into a pattern signals that you are actively thinking about their listing — not just forwarding emails.'
+  },
+  {
+    num: 3,
+    title: 'What I Am Doing This Week',
+    tag: 'The proactive section',
+    body: `<p>List <strong>three to five specific actions</strong> you have taken or will take. This is the most-skipped section in most agents' updates and the one that earns the most likes.</p>
+           <p>Examples:</p>
+           <p style="margin-left: 16px;">• "Reposted the listing to my Mandarin WeChat network — 240 contacts"<br>
+           • "Reached out to 4 buyer agents who toured similar homes nearby in the past 30 days"<br>
+           • "Refreshed the listing photos sequence — leading with the kitchen now based on online click data"<br>
+           • "Boosted the social media post for the listing on Saturday and Sunday"</p>`,
+    takeaway: 'Sellers want to see effort. They cannot see the work you do behind the scenes unless you tell them. Telling them is not bragging — it is reporting. The agents who lose listings in slow markets are the ones who do plenty of work but never tell the seller about it.'
+  },
+  {
+    num: 4,
+    title: 'My Read + What We Should Consider',
+    tag: 'Become the consultant',
+    body: `<p>This is where you become the consultant — your professional identity. State your <strong>read on the market position</strong>, then offer one or two strategic options for the coming week.</p>`,
+    example: `"My read: we're getting consistent interest and consistent feedback, but no one is moving to an offer yet. That usually means the home is priced just above where buyers are willing to commit. Two options for the coming week: we can hold and see if any of these buyers come back, or we can adjust by [$X] to push past the next price threshold on Realtor.ca search filters. I have a slight preference for option 2, and here's why — but the decision is yours."`,
+    takeaway: 'You are treating them as a partner in strategy, not a passive recipient of news. You present options, share your view, but explicitly leave the choice with them. That is the calm-consultant identity your brand is built on.'
+  },
+  {
+    num: 5,
+    title: 'One Human Line',
+    tag: 'The line they remember',
+    body: `<p>Close with <strong>one sentence that is not business</strong>. It can be acknowledgment, forward-looking, or simply human:</p>
+           <p style="margin-left: 16px;">• <em>"I know the showing on Tuesday meant rearranging the kids' schedule — thank you for being so flexible."</em><br>
+           • <em>"I'll have the open house signs out by Saturday morning, weather permitting."</em><br>
+           • <em>"Hope you got to enjoy the long weekend."</em></p>
+           <p>One line. Not a paragraph.</p>`,
+    takeaway: 'This is what the seller actually remembers from the email. Numbers fade. The human moment stays.'
+  }
+];
+
+// ============================================================
+// Supporting Notes Data
+// ============================================================
+const supportingNotes = [
+  {
+    title: 'Format and Timing',
+    cls: '',
+    content: `<p><strong>Channel:</strong> Email is best for the formal weekly update because it creates a paper trail the seller can reference. Pair it with a short text the same day: <em>"Just sent the weekly update to your inbox — let me know if you want to chat through any of it."</em> The text earns its own small like by signalling availability without demanding a response.</p>
+              <p><strong>Timing:</strong> Same day every week. Sunday evening or Monday morning works best — Sunday lets the weekend showings be included; Monday lets you reference what is coming this week. Pick one and stick with it. Inconsistency in timing tells the seller you are squeezing them in when you have time.</p>
+              <p><strong>Length:</strong> One screen on a phone. If they have to scroll, it is too long. The 5-part structure naturally fits in 200–300 words.</p>`
+  },
+  {
+    title: 'The Week-Three Pivot',
+    cls: '',
+    content: `<p>Most listings that do not sell in the first two weeks need a strategy change in week three. The weekly update is the vehicle for that conversation — but only if you have been earning likes consistently in weeks one and two.</p>
+              <p>By week three, if showing volume is dropping and feedback has stabilized into a pattern, your update should explicitly raise the strategic question:</p>
+              <div class="quote">"We're at the natural inflection point of the listing period. I'd like to come by this week to talk through three options — hold, refresh, or adjust price. None of them are wrong; they're just different ways to play the next stage. Can we find 30 minutes?"</div>
+              <p>Sellers who have been getting good weekly updates will say yes. Sellers who have been getting lazy weekly updates will start to mistrust the messenger right when you need them to trust you most.</p>`
+  },
+  {
+    title: 'A Note on Bad-News Weeks',
+    cls: 'warning',
+    content: `<p>The hardest update to write is the week with zero showings. Most agents either skip the update entirely (worst move) or pad it with market commentary to disguise the silence (second-worst move). Both make the seller feel something is being hidden.</p>
+              <p>The right move is to send the update on schedule, lead with the honest number, and immediately pivot to what you are doing about it:</p>
+              <div class="quote">"Showings: 0 this week. That's quiet, and I want to address it head-on. Here's what I'm doing this week to change that..."</div>
+              <p>The seller respects the directness. The like is earned by the courage to say "0" without flinching, paired with a clear plan.</p>`
+  },
+  {
+    title: 'The Underlying Principle',
+    cls: 'signature',
+    content: `<p>The weekly update is not really about the showings.</p>
+              <p>It is about consistently demonstrating that <strong>you are still working on their listing as hard as you were on day one</strong>. Sellers worry that they become invisible to their agent after the listing goes live.</p>
+              <p>Your weekly update is the antidote.</p>`
+  }
+];
+
+// ============================================================
+// Render the 5-Part Framework
+// ============================================================
+function renderFramework() {
+  const container = document.getElementById('frameworkSections');
+  container.innerHTML = framework.map(part => `
+    <div class="framework-card">
+      <div class="framework-head">
+        <div class="framework-num">${part.num}</div>
+        <div class="framework-title">${escapeHtml(part.title)}</div>
+        <div class="framework-tag">${escapeHtml(part.tag)}</div>
+      </div>
+      <div class="framework-desc">${part.body}</div>
+      ${part.example ? `<div class="framework-example">${escapeHtml(part.example)}</div>` : ''}
+      <div class="framework-takeaway">
+        <strong>Why this earns the like</strong>
+        ${escapeHtml(part.takeaway)}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// Render the Supporting Notes
+// ============================================================
+function renderSupportingNotes() {
+  const container = document.getElementById('supportingNotes');
+  container.innerHTML = supportingNotes.map(note => `
+    <div class="note-card ${note.cls}">
+      <h3>${escapeHtml(note.title)}</h3>
+      ${note.content}
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// Format helpers
+// ============================================================
+function escapeHtml(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
+
+function formatEmail(text) {
+  // Bold the section labels and wrap [field] in styled tags
+  return escapeHtml(text)
+    .replace(/^(The numbers|What the feedback is telling us|What I am doing this week|What I am doing this week to change the trajectory|What I think is happening|My read|One last note|The numbers to date|What the cumulative feedback is telling us|The three options I want to walk through with you|Can we find 30 minutes this week\?|The numbers since the adjustment|What this is telling us)$/gm, '<strong>$1</strong>')
+    .replace(/\[([^\]]+)\]/g, '<span class="field-tag">[$1]</span>');
+}
+
+function formatPhone(text) {
+  return escapeHtml(text)
+    .replace(/^\[([^\]]+)\]$/gm, '<strong style="color: var(--gold);">[$1]</strong>')
+    .replace(/\[NAME\]/g, '<span class="field-tag">[NAME]</span>')
+    .replace(/\[ADDRESS\]/g, '<span class="field-tag">[ADDRESS]</span>');
+}
+
+// ============================================================
+// Replace [ADDRESS] in copied content with current value
+// ============================================================
+function applyAddress(text) {
+  const addr = document.getElementById('address').value.trim();
+  if (!addr) return text;
+  return text.replace(/\[ADDRESS\]/g, addr);
+}
+
+// ============================================================
+// Event handling
+// ============================================================
+document.addEventListener('click', (e) => {
+  const action = e.target.closest('[data-action]');
+  if (!action) return;
+
+  const type = action.dataset.action;
+
+  if (type === 'toggle') {
+    const card = action.closest('.template');
+    card.classList.toggle('expanded');
+  }
+
+  if (type === 'copy-email') {
+    const idx = +action.dataset.idx;
+    const tpl = templates[idx];
+    const subject = applyAddress(tpl.subject);
+    const body = applyAddress(tpl.email);
+    const full = `Subject: ${subject}\n\n${body}`;
+    copyText(full, action);
+  }
+
+  if (type === 'copy-phone') {
+    const idx = +action.dataset.idx;
+    const tpl = templates[idx];
+    const phone = applyAddress(tpl.phone);
+    copyText(phone, action);
+  }
+});
+
+// ============================================================
+// Address persistence
+// ============================================================
+async function initAddress() {
+  const saved = await getSetting('lastAddress');
+  if (saved) {
+    document.getElementById('address').value = saved;
+    document.getElementById('lastUsed').textContent = '(remembered)';
+  }
+  document.getElementById('address').addEventListener('input', async (e) => {
+    await saveSetting('lastAddress', e.target.value.trim());
+    document.getElementById('lastUsed').textContent = e.target.value.trim() ? '(saved)' : '';
+  });
+}
+
+// ============================================================
+// Boot
+// ============================================================
+async function init() {
+  try {
+    await openDB();
+    await initAddress();
+    renderTemplates();
+    renderFramework();
+    renderSupportingNotes();
+  } catch (err) {
+    console.error('Init error:', err);
+    renderTemplates(); // fall back without persistence
+    renderFramework();
+    renderSupportingNotes();
+  }
+}
+
+init();
+</script>
+</body>
+</html>
