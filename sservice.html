@@ -469,6 +469,292 @@
     line-height: 1.6;
   }
 
+  /* ============== THREE PILLARS ============== */
+  .pillars-intro {
+    font-size: 14.5px;
+    color: var(--gray-text);
+    margin-bottom: 32px;
+    line-height: 1.75;
+  }
+
+  .pillar-card {
+    background: white;
+    border: 1px solid var(--gray-line);
+    border-radius: 2px;
+    margin: 30px 0;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(10, 37, 64, 0.04);
+  }
+
+  .pillar-header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    color: white;
+    padding: 26px 36px;
+    position: relative;
+  }
+
+  .pillar-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gold);
+  }
+
+  .pillar-number {
+    font-family: 'Georgia', serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+
+  .pillar-name {
+    font-family: 'Georgia', serif;
+    font-size: 30px;
+    color: white;
+    margin: 0 0 6px 0;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+  }
+
+  .pillar-tagline {
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    margin: 0;
+  }
+
+  .pillar-body {
+    padding: 32px 38px;
+  }
+
+  .pillar-body h4 {
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    color: var(--navy);
+    margin: 28px 0 12px 0;
+    font-weight: normal;
+    letter-spacing: 0.3px;
+  }
+
+  .pillar-body h4:first-child {
+    margin-top: 0;
+  }
+
+  .pillar-body p {
+    font-size: 14.5px;
+    line-height: 1.75;
+    margin: 0 0 14px 0;
+    color: var(--gray-text);
+  }
+
+  .pillar-body p strong {
+    color: var(--navy);
+  }
+
+  .pillar-body ul, .pillar-body ol {
+    padding-left: 22px;
+    margin: 12px 0;
+    font-size: 14.5px;
+    line-height: 1.8;
+  }
+
+  .pillar-body ul li, .pillar-body ol li {
+    margin-bottom: 8px;
+  }
+
+  .pillar-body ul li::marker, .pillar-body ol li::marker {
+    color: var(--gold);
+  }
+
+  /* States contrast block (used in visibility) */
+  .states-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 18px 0 22px 0;
+  }
+
+  .state-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 0;
+    border: 1px solid var(--gray-line);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .state-label {
+    background: var(--gray-bg);
+    padding: 14px 16px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--navy);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+
+  .state-row.state-good .state-label {
+    background: var(--gold-soft);
+    color: var(--navy);
+  }
+
+  .state-content {
+    padding: 14px 18px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--gray-text);
+  }
+
+  /* Comparison block (invisible vs visible) */
+  .compare-pair {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 16px 0 22px 0;
+  }
+
+  .compare-side {
+    padding: 16px 20px;
+    border-radius: 2px;
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+
+  .compare-side .compare-label {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .compare-invisible {
+    background: #f4f1ec;
+    border-left: 3px solid #b8b0a3;
+  }
+
+  .compare-invisible .compare-label {
+    color: #6b6b6b;
+  }
+
+  .compare-visible {
+    background: var(--gold-soft);
+    border-left: 3px solid var(--gold);
+  }
+
+  .compare-visible .compare-label {
+    color: var(--gold);
+  }
+
+  /* Six components grid (felt experience) */
+  .components-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 22px 0;
+  }
+
+  .component-item {
+    background: var(--gray-bg);
+    border-left: 3px solid var(--gold);
+    padding: 18px 22px;
+    border-radius: 2px;
+  }
+
+  .component-item .component-label {
+    font-family: 'Georgia', serif;
+    font-size: 16px;
+    color: var(--navy);
+    margin-bottom: 8px;
+    font-weight: normal;
+  }
+
+  .component-item .component-label .component-num {
+    color: var(--gold);
+    font-style: italic;
+    margin-right: 6px;
+  }
+
+  .component-item p {
+    font-size: 13.5px;
+    margin: 0 0 8px 0;
+    line-height: 1.65;
+  }
+
+  .component-item p:last-child { margin-bottom: 0; }
+
+  .component-item .opposite {
+    font-style: italic;
+    color: var(--gray-soft);
+    font-size: 13px;
+  }
+
+  /* Inline emphasis box */
+  .insight-box {
+    background: var(--gold-soft);
+    border-left: 3px solid var(--gold);
+    padding: 18px 22px;
+    margin: 20px 0;
+    border-radius: 2px;
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--navy);
+  }
+
+  .insight-box strong {
+    color: var(--navy);
+  }
+
+  /* Integration summary at end of pillars */
+  .integration-block {
+    background: linear-gradient(135deg, #fbf8ef 0%, #f8f4e6 100%);
+    border: 1px solid var(--gold);
+    padding: 28px 34px;
+    margin: 40px 0 30px 0;
+    border-radius: 2px;
+  }
+
+  .integration-block h4 {
+    font-family: 'Georgia', serif;
+    font-size: 20px;
+    color: var(--navy);
+    margin: 0 0 14px 0;
+    font-weight: normal;
+  }
+
+  .integration-block p {
+    font-size: 14.5px;
+    line-height: 1.75;
+    margin: 0 0 12px 0;
+    color: var(--gray-text);
+  }
+
+  .integration-block p:last-child { margin-bottom: 0; }
+
+  .integration-block .three-line {
+    margin: 16px 0;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.6);
+    border-left: 2px solid var(--gold);
+  }
+
+  .integration-block .three-line p {
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+
+  .integration-block .three-line p:last-child { margin-bottom: 0; }
+
   /* ============== PRINT ============== */
   @media print {
     body { background: white; }
@@ -477,7 +763,8 @@
       padding: 30px 40px;
       max-width: 100%;
     }
-    .principle-box, .takeaway-box, .numbered-card, .phase-block, .subsection {
+    .principle-box, .takeaway-box, .numbered-card, .phase-block, .subsection,
+    .pillar-card, .component-item, .integration-block, .insight-box {
       page-break-inside: avoid;
     }
     .part-header {
@@ -512,6 +799,7 @@
     <div class="toc-title">Contents</div>
     <ol>
       <li>The Foundational Principles</li>
+      <li>The Three Pillars — Visibility, Communication, Felt Experience</li>
       <li>Phase 1 — First Contact &amp; Listing Presentation</li>
       <li>Phase 2 — Pre-Listing Preparation</li>
       <li>Phase 3 — On the Market</li>
@@ -541,11 +829,263 @@
   </div>
 
   <!-- ====================================================== -->
-  <!-- ============ PART II: PHASE-BY-PHASE PLAN ============ -->
+  <!-- ============ PART II: THE THREE PILLARS ============== -->
   <!-- ====================================================== -->
 
   <div class="part-header">
     <div class="part-label">Part Two</div>
+    <h2>The Three Pillars</h2>
+    <p class="part-subtitle">Visibility, Communication, Felt Experience — what each one really means</p>
+  </div>
+
+  <p class="pillars-intro">
+    Exceptional service rests on three pillars. They are not interchangeable, and they are not the same thing. <strong>Visibility</strong> is about the seller seeing your work. <strong>Communication</strong> is about how that work is conveyed and understood. <strong>Felt experience</strong> is the emotional residue the seller carries away from the entire process. The first two are inputs. The third is the output that determines whether they refer you. This section explores each in depth.
+  </p>
+
+  <!-- ============== PILLAR 1: VISIBILITY ============== -->
+  <div class="pillar-card">
+    <div class="pillar-header">
+      <div class="pillar-number">Pillar One</div>
+      <h3 class="pillar-name">Visibility</h3>
+      <p class="pillar-tagline">The seller can see the work you're doing for them</p>
+    </div>
+    <div class="pillar-body">
+
+      <h4>What visibility actually means</h4>
+      <p>Visibility means the seller can see the work you're doing — not all of it, but enough of it, often enough, that they have a clear sense at any given moment of what you've been doing on their behalf.</p>
+
+      <p>The reason this matters is uncomfortable but true: <strong>your client cannot judge the quality of your invisible work.</strong> They can only judge what they see and feel. So when you do excellent work behind the scenes that they never witness, two things happen — you don't get credit for it, and they underestimate what you did. This isn't because clients are ungrateful. It's because <strong>humans evaluate experiences based on what they perceived, not on what objectively happened.</strong></p>
+
+      <h4>The three states of "doing the work"</h4>
+
+      <div class="states-grid">
+        <div class="state-row">
+          <div class="state-label">State 1</div>
+          <div class="state-content"><strong>Doing nothing.</strong> No work, no communication. Obvious failure — the seller correctly perceives neglect.</div>
+        </div>
+        <div class="state-row">
+          <div class="state-label">State 2</div>
+          <div class="state-content"><strong>Doing real work, but invisibly.</strong> You're pulling comps, calling buyer agents, thinking strategically — but none of this is visible. From the seller's perspective, this looks identical to State 1. They cannot tell the difference between "agent is working hard but quietly" and "agent has forgotten about us."</div>
+        </div>
+        <div class="state-row state-good">
+          <div class="state-label">State 3</div>
+          <div class="state-content"><strong>Doing real work, visibly.</strong> Same work as State 2, but you're showing the outputs, sending updates, demonstrating thinking. The seller correctly perceives that you're working.</div>
+        </div>
+      </div>
+
+      <p>Most good agents live in State 2 and assume their work speaks for itself. <strong>It doesn't.</strong> Silence speaks louder than effort. The agents who get referrals deliberately move themselves from State 2 to State 3.</p>
+
+      <h4>Why this matters especially for an introvert's work style</h4>
+      <p>Visibility is harder for introverts than for extroverts. Extroverts broadcast naturally — calling clients, posting, dropping in. Their work is visible almost as a side effect of their personality. Introverts default to deep, quiet work — concentrating, analyzing, drafting careful clauses — and then, having done excellent work, moving on without telling anyone. <strong>The work is real but the visibility is missing.</strong></p>
+
+      <p>This is the introvert's blind spot in client service. Your strength — careful, focused, thorough work — produces excellent outcomes but doesn't naturally produce visibility. <strong>You have to build visibility deliberately, as a discipline, because it won't happen by personality default.</strong> The good news: visibility doesn't have to come from extroverted energy. It can come from structured, scheduled, consistent communication outputs — which suits how you already work.</p>
+
+      <h4>What visibility looks like in practice</h4>
+      <p>The same action can be done invisibly or visibly. The work doesn't change. What changes is whether the seller sees it.</p>
+
+      <div class="compare-pair">
+        <div class="compare-side compare-invisible">
+          <span class="compare-label">Invisible · Pricing Analysis</span>
+          You spend three hours pulling comps, analyzing absorption rates, looking at days-on-market trends, and arriving at a recommended list price.
+        </div>
+        <div class="compare-side compare-visible">
+          <span class="compare-label">Visible · Pricing Analysis</span>
+          Same three hours of work, then you send the seller a one-page summary: <em>"Here are the eight comparable sales I analyzed. Here's the price range they support. Here's where I'm recommending we list, and the three reasons why."</em>
+        </div>
+      </div>
+
+      <div class="compare-pair">
+        <div class="compare-side compare-invisible">
+          <span class="compare-label">Invisible · Negotiation Work</span>
+          You spend an hour on the phone with the buyer's agent, probing for information, reading their tone, gauging their flexibility, planning your strategy.
+        </div>
+        <div class="compare-side compare-visible">
+          <span class="compare-label">Visible · Negotiation Work</span>
+          After the call, you send a quick note: <em>"Just got off a call with the buyer's agent. Here's what I learned. Here's how I'm reading their position. Here's what I think we should do next."</em>
+        </div>
+      </div>
+
+      <h4>What visibility is not</h4>
+      <p><strong>Visibility is not bragging.</strong> You're not telling the seller how hard you're working. You're showing them the <em>outputs</em> of your work and letting those outputs speak for themselves.</p>
+      <p><strong>Visibility is not constant noise.</strong> Sending pointless messages just to seem active is worse than silence. Every visible touchpoint should carry real content — information, interpretation, or a clear next action.</p>
+      <p><strong>Visibility is not demanding gratitude.</strong> The point isn't to be appreciated in the moment — it's that when the deal closes, the seller has an accurate sense of the work you did.</p>
+      <p><strong>Visibility is not a substitute for substance.</strong> If the underlying work is weak, no amount of visibility will rescue it. Make the work excellent first, then make it visible.</p>
+
+      <h4>The mental shift that makes this easier</h4>
+      <div class="insight-box">
+        <strong>Visibility is a service to your client, not a service to yourself.</strong> When the seller doesn't know what's happening, they fill the silence with anxiety. <em>Is the listing getting attention? Is my agent paying attention? Did I make a mistake hiring this person?</em> When you make your work visible, you're not promoting yourself — you're <strong>relieving their anxiety</strong>. That's a gift to them, not a performance for them.
+      </div>
+
+      <h4>A practical exercise</h4>
+      <p>For one current listing, track everything you do in one day on the seller's behalf. Every phone call, every search, every email, every analysis. At the end of the day, ask: <strong>how much of this does the seller know about?</strong> If the honest answer is "most of it, none of it" — you have invisible work. The next question: <strong>how could one short message at the end of the day have made even half of this visible?</strong></p>
+
+    </div>
+  </div>
+
+  <!-- ============== PILLAR 2: COMMUNICATION ============== -->
+  <div class="pillar-card">
+    <div class="pillar-header">
+      <div class="pillar-number">Pillar Two</div>
+      <h3 class="pillar-name">Communication</h3>
+      <p class="pillar-tagline">How visibility is conveyed and understood</p>
+    </div>
+    <div class="pillar-body">
+
+      <h4>What communication actually means</h4>
+      <p>If visibility is <em>what</em> you show the seller, communication is <em>how</em> you show it. Two agents can have identical visibility — same updates, same frequency, same outputs — and produce very different felt experiences depending on the quality of the channel.</p>
+
+      <p>Communication is the bridge between the work you do and the seller's understanding of that work. When the bridge is strong, your effort lands as clarity, reassurance, and partnership. When the bridge is weak, even excellent work fails to register correctly.</p>
+
+      <h4>The four dimensions of strong communication</h4>
+
+      <div class="components-grid">
+        <div class="component-item">
+          <div class="component-label"><span class="component-num">1.</span> Frequency</div>
+          <p>How often the seller hears from you. The default rule: <strong>communicate more than you think you need to.</strong> A seller who hears from you three times a week feels well-served. A seller who hears from you once a week — even if you're working harder behind the scenes — feels neglected.</p>
+        </div>
+        <div class="component-item">
+          <div class="component-label"><span class="component-num">2.</span> Quality</div>
+          <p>Frequency without substance becomes noise. Every touchpoint should carry at least one of three things: <strong>information they didn't have</strong>, <strong>interpretation that helps them think</strong>, or <strong>a clear next action</strong>. Sellers can feel the difference between content and filler.</p>
+        </div>
+        <div class="component-item">
+          <div class="component-label"><span class="component-num">3.</span> Channel match</div>
+          <p>The right channel for the right message — and the right channel for the individual seller. Some prefer text. Some want a phone call. Some want written summaries. <strong>Ask early in the relationship</strong> rather than assume. For Mandarin-speaking clients, language preference matters too.</p>
+        </div>
+        <div class="component-item">
+          <div class="component-label"><span class="component-num">4.</span> Tone</div>
+          <p>The same information delivered in a calm, warm tone lands very differently than the same information delivered hurriedly or transactionally. <strong>Tone is the carrier wave</strong> on which all communication content travels. Your unhurried, consultative voice is a genuine asset here — protect it even when you're tired.</p>
+        </div>
+      </div>
+
+      <h4>The single most important communication discipline</h4>
+      <div class="insight-box">
+        <strong>Anticipate questions before they're asked.</strong> When a seller has to ask <em>"any updates?"</em> — you've already lost a small amount of trust, even if your answer is good. They had to wonder. They had to chase. Send the update before they think to ask. That gives the seller something rare: <strong>the feeling that you're holding the worry for them.</strong>
+      </div>
+
+      <h4>Communicating bad news</h4>
+      <p>The instinct during problems is to go quiet — to wait until you have a resolution before reaching out. <strong>This is exactly wrong.</strong> During problems, communicate more, not less. Even just: <em>"Quick update — here's what's happened. I'm working on it. I'll update you by end of day either way, even if there's nothing new to report."</em></p>
+
+      <p>The seller's worst experience isn't that something went wrong. It's <strong>feeling alone with the problem</strong>. Your visible presence during difficulty is what they'll remember about how you handled the deal — far more than the smooth parts.</p>
+
+      <h4>Communicating what you won't do</h4>
+      <p>Most agents make implicit promises by enthusiasm: <em>"We'll get this sold quickly!"</em> When reality doesn't match, trust erodes. The calmer, more powerful move is to <strong>set clear expectations on the downside</strong> — not by lowering expectations of the outcome, but by calibrating expectations of the process so the seller is never blindsided.</p>
+
+      <h4>Why communication is your highest-leverage skill</h4>
+      <p>Most sellers' biggest complaint about their agent is some version of <em>"I didn't hear from them enough."</em> This complaint generates more lost referrals than every other failure combined. <strong>Make this complaint structurally impossible</strong> by building communication into your process as a non-negotiable standard. Done well, communication is the closest thing there is to a guaranteed referral generator in this business.</p>
+
+    </div>
+  </div>
+
+  <!-- ============== PILLAR 3: FELT EXPERIENCE ============== -->
+  <div class="pillar-card">
+    <div class="pillar-header">
+      <div class="pillar-number">Pillar Three</div>
+      <h3 class="pillar-name">Felt Experience</h3>
+      <p class="pillar-tagline">The emotional residue the seller carries away</p>
+    </div>
+    <div class="pillar-body">
+
+      <h4>What felt experience actually means</h4>
+      <p>Felt experience is the emotional residue the seller carries away from working with you. Not what happened. Not what you did. Not even what they consciously remember. <strong>It's the underlying sense of what it felt like to be your client.</strong></p>
+
+      <p>Months after the deal closes, when someone at a dinner party mentions selling their home and your past client is asked <em>"who was your agent?"</em> — what comes out of their mouth is not a recitation of facts. It's a feeling, translated into a sentence:</p>
+
+      <ul>
+        <li><em>"He was great — I felt taken care of the whole time."</em></li>
+        <li><em>"She was fine, I guess. We got it sold."</em></li>
+        <li><em>"He was a nightmare. We just wanted it to be over."</em></li>
+      </ul>
+
+      <p>Those three sentences could describe transactions with identical financial outcomes. <strong>What differs is the felt experience — and that's what gets reported, remembered, and referred from.</strong></p>
+
+      <h4>Why felt experience is the most important pillar</h4>
+      <p>Visibility and communication are <em>inputs</em>. They are things you do. Felt experience is the <em>output</em> — what those inputs produce in the seller's emotional memory. You can do everything right on visibility and communication and still produce a poor felt experience if the underlying tone, attention, and care are off.</p>
+
+      <p>The reason felt experience matters most: <strong>it's what gets remembered.</strong> Memory is emotional, not factual. People forget the details of a transaction within months. They don't forget how it felt.</p>
+
+      <h4>The six components of strong felt experience</h4>
+
+      <div class="components-grid">
+        <div class="component-item">
+          <div class="component-label"><span class="component-num">1.</span> Feeling seen</div>
+          <p>The seller experiences themselves as a specific person, not a generic transaction. You remember small things, ask about their family, notice when they're stressed.</p>
+          <p class="opposite">Opposite: feeling <em>processed</em> — moved through a pipeline like everyone else.</p>
+        </div>
+        <div class="component-item">
+          <div class="component-label"><span class="component-num">2.</span> Feeling informed</div>
+          <p>The seller never feels in the dark. They always know what's happening, what's next, and what the trade-offs are.</p>
+          <p class="opposite">Opposite: feeling <em>confused</em> or <em>out of the loop</em>.</p>
+        </div>
+        <div class="component-item">
+          <div class="component-label"><span class="component-num">3.</span> Feeling protected</div>
+          <p>The seller senses that you are watching out for them. You catch what they would miss. You raise concerns they didn't know to raise.</p>
+          <p class="opposite">Opposite: feeling <em>exposed</em> — sensing they had to fend for themselves.</p>
+        </div>
+        <div class="component-item">
+          <div class="component-label"><span class="component-num">4.</span> Feeling steady</div>
+          <p>During inevitable bumps, your calm composure becomes their composure. They borrow your steadiness.</p>
+          <p class="opposite">Opposite: feeling <em>rattled</em> — having gone through the deal in a heightened state.</p>
+        </div>
+        <div class="component-item">
+          <div class="component-label"><span class="component-num">5.</span> Feeling respected</div>
+          <p>Their time is valued. Their decisions honored. They are spoken to as an adult capable of understanding what's happening.</p>
+          <p class="opposite">Opposite: feeling <em>managed</em> — sensing the agent was handling them rather than serving them.</p>
+        </div>
+        <div class="component-item">
+          <div class="component-label"><span class="component-num">6.</span> Feeling cared about</div>
+          <p>Beyond competence, beyond systems — the seller senses that you actually care about <strong>them</strong>, not just about closing the deal.</p>
+          <p class="opposite">Opposite: feeling <em>transactional</em> — treated well enough but not genuinely cared about.</p>
+        </div>
+      </div>
+
+      <h4>How felt experience is actually produced</h4>
+      <p>Felt experience isn't produced primarily by <em>what you do</em> — it's produced by <em>how you do what you do.</em> Two agents can both send a weekly email with showing activity. One opens functionally. The other opens with a sentence that acknowledges the seller's emotional state: <em>"I know two weeks without an offer is starting to feel long; I want you to know I'm thinking about this carefully."</em></p>
+
+      <p>Same action. Same channel. Same frequency. <strong>Completely different felt experience.</strong></p>
+
+      <p>This is why felt experience can't be manufactured purely through systems. The systems make sure the work happens. The presence inside the work makes it land.</p>
+
+      <h4>The hidden mechanism — emotional contagion</h4>
+      <div class="insight-box">
+        Humans constantly and unconsciously pick up on the emotional state of the people they interact with. When you sit across from a seller, your emotional state is transmitted to them whether you intend it to be or not. <strong>If your underlying state is rushed, distracted, transactional — they will feel it, even if your words are warm.</strong> If your underlying state is calm, present, caring — they will feel that too, even when you're delivering hard news. The felt experience is being produced by your actual internal state, not by your performance.
+      </div>
+
+      <p>This is why protecting your own equilibrium — your wellness work, your unhurried pace, your careful boundaries — is not separate from client service. It is foundational to it. Burned-out agents produce transactional felt experiences even when they don't intend to.</p>
+
+      <h4>Your natural advantage</h4>
+      <p>The agents who struggle most with felt experience are those whose energy is pointed at themselves — at their own pipeline, their commission, their performance of competence. That self-directed energy is unconsciously detected by clients.</p>
+
+      <p>Your natural orientation — calm, observant, attentive, client-centered — is exactly the orientation that produces strong felt experience. <strong>You're not performing. You're not in a hurry. You're just present and paying attention.</strong> For you, felt experience is less about developing something new and more about protecting and operationalizing what's already there.</p>
+
+      <h4>How felt experience compounds</h4>
+      <p>A single transaction with a strong felt experience produces, on average, two to four referral conversations over the next three years. Some of those convert. Each new client, with their own strong felt experience, produces their own two to four conversations.</p>
+
+      <p>This is exponential, not linear. After ten years, an agent who consistently produces strong felt experiences has built a referral network that operates almost independently of direct prospecting. <strong>Their business sustains itself through reputation.</strong> An agent who produces neutral felt experiences — even closing the same number of deals in year one — produces almost no referral compounding. They have to start each year fresh.</p>
+
+      <p>Both agents work hard. Both close deals. <strong>Only one builds a career that compounds.</strong></p>
+
+    </div>
+  </div>
+
+  <!-- INTEGRATION SUMMARY -->
+  <div class="integration-block">
+    <h4>How the Three Pillars Work Together</h4>
+    <p>Visibility, communication, and felt experience reinforce each other. Together they form the architecture of exceptional service.</p>
+    <div class="three-line">
+      <p><strong>Visibility</strong> ensures the seller can see your work.</p>
+      <p><strong>Communication</strong> ensures they understand what they're seeing, in a way that suits them.</p>
+      <p><strong>Felt experience</strong> ensures the whole thing lands as care, not as process.</p>
+    </div>
+    <p>The first two are mechanics. The third is presence. The first two can be largely systematized. The third requires you to bring something of yourself into the work — attention, warmth, real interest in the client as a person.</p>
+    <p>Without visibility, even great communication is just noise about nothing. Without communication, even great visibility goes unseen. Without felt experience, even both together produce a transaction that closes but doesn't compound. <strong>All three, deliberately, over years — that's how a real career in this work is made.</strong></p>
+  </div>
+
+  <!-- ====================================================== -->
+  <!-- ============ PART III: PHASE-BY-PHASE PLAN =========== -->
+  <!-- ====================================================== -->
+
+  <div class="part-header">
+    <div class="part-label">Part Three</div>
     <h2>The Six-Phase Service Plan</h2>
     <p class="part-subtitle">Operational rhythm from first contact to long-term relationship</p>
   </div>
@@ -647,7 +1187,7 @@
   <!-- ====================================================== -->
 
   <div class="part-header">
-    <div class="part-label">Part Three</div>
+    <div class="part-label">Part Four</div>
     <h2>The Ten Depth Principles</h2>
     <p class="part-subtitle">What separates good communication from truly memorable service</p>
   </div>
@@ -784,7 +1324,7 @@
   <!-- ====================================================== -->
 
   <div class="part-header">
-    <div class="part-label">Part Four</div>
+    <div class="part-label">Part Five</div>
     <h2>Structural Practices &amp; Standards</h2>
     <p class="part-subtitle">Operationalizing exceptional service through systems</p>
   </div>
@@ -826,7 +1366,7 @@
   <!-- ====================================================== -->
 
   <div class="part-header">
-    <div class="part-label">Part Five</div>
+    <div class="part-label">Part Six</div>
     <h2>The Deeper Insight</h2>
     <p class="part-subtitle">Why this work matters, and what sellers actually remember</p>
   </div>
