@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seller's Roadmap — Freehold Property | Pinnacle Listing System</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2744; --gold: #c9a84c; --gold-light: #e8d5a3;
+    --cream: #fdfaf4; --text: #2c2c2c; --text-light: #555;
+    --border: #d4c9a8; --section-bg: #f5f0e8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); font-size: 14px; line-height: 1.65; padding: 20px; }
+  .page { max-width: 860px; margin: 0 auto; background: #fff; border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 48px 56px; }
+  .setup-panel { background: var(--navy); color: #fff; padding: 20px 24px; margin-bottom: 28px; border: 2px solid var(--gold); }
+  .setup-title { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.2); }
+  .setup-section-title { font-size: 11px; color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.1em; margin: 16px 0 8px; padding-bottom: 4px; border-bottom: 1px dashed rgba(232,213,163,0.3); }
+  .setup-section-title:first-child { margin-top: 0; }
+  .setup-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+  .setup-field { display: flex; flex-direction: column; gap: 4px; }
+  .setup-field label { font-size: 10px; color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
+  .setup-field input { background: #fff; border: none; padding: 8px 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text); }
+  .setup-actions { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .setup-btn { background: var(--gold); color: var(--navy); border: none; padding: 8px 16px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; }
+  .setup-btn:hover { background: var(--gold-light); }
+  .setup-btn.secondary { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+  .setup-btn.secondary:hover { background: rgba(201,168,76,0.15); }
+  .header { border-bottom: 3px double var(--gold); padding-bottom: 20px; margin-bottom: 28px; text-align: center; }
+  .brand-tag { font-size: 11px; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
+  .title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .subtitle { font-size: 13px; color: var(--text-light); font-style: italic; }
+  .property-info { background: var(--section-bg); padding: 14px 18px; margin: 14px 0 0; text-align: left; border-left: 4px solid var(--gold); }
+  .property-info-row { display: flex; gap: 12px; align-items: baseline; font-size: 13px; margin: 3px 0; }
+  .property-info-label { font-size: 11px; text-transform: uppercase; color: var(--gold); letter-spacing: 0.08em; font-weight: 500; min-width: 80px; }
+  .property-info-value { color: var(--navy); font-weight: 500; }
+  .property-type-badge { display: inline-block; background: var(--navy); color: var(--gold); font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 600; padding: 6px 18px; border: 1.5px solid var(--gold); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 10px; }
+  .intro { background: var(--section-bg); border-left: 4px solid var(--gold); padding: 16px 20px; margin-bottom: 28px; font-size: 13.5px; line-height: 1.7; }
+  .stage { margin-bottom: 24px; }
+  .stage-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--gold-light); flex-wrap: wrap; }
+  .stage-day { background: var(--navy); color: var(--gold); font-family: 'Playfair Display', serif; font-size: 12px; font-weight: 600; padding: 4px 12px; letter-spacing: 0.08em; white-space: nowrap; text-transform: uppercase; }
+  .stage-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: var(--navy); }
+  .stage-date { font-size: 12px; color: var(--gold); font-weight: 500; margin-left: auto; font-style: italic; }
+  .date-inline { color: var(--navy); font-weight: 600; background: #fef9e8; padding: 1px 6px; border-radius: 2px; }
+  .task-group-label { font-size: 11px; font-weight: 500; color: var(--gold); text-transform: uppercase; letter-spacing: 0.12em; margin: 12px 0 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .task-group-label .label-text { flex: 1; }
+  .add-item-btn { background: transparent; color: var(--gold); border: 1px dashed var(--gold); padding: 2px 8px; font-family: 'DM Sans', sans-serif; font-size: 10px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.06em; }
+  .add-item-btn:hover { background: rgba(201,168,76,0.1); }
+  @media print { .add-item-btn { display: none; } }
+  .task { display: flex; align-items: flex-start; gap: 10px; padding: 5px 0; font-size: 13.5px; line-height: 1.6; }
+  .task-box { appearance: none; -webkit-appearance: none; width: 14px; height: 14px; border: 1.5px solid var(--navy); margin-top: 4px; flex-shrink: 0; background: #fff; cursor: pointer; position: relative; }
+  .task-box:checked { background: var(--navy); }
+  .task-box:checked::after { content: '✓'; position: absolute; top: -3px; left: 1px; color: var(--gold); font-size: 13px; font-weight: bold; }
+  .task-text { flex: 1; color: var(--text); }
+  .task-custom-input { flex: 1; border: none; border-bottom: 1px dashed var(--gold); font-family: 'DM Sans', sans-serif; font-size: 13.5px; padding: 2px 0; background: transparent; outline: none; color: var(--text); }
+  .task-remove { background: transparent; border: none; color: var(--text-light); cursor: pointer; font-size: 14px; padding: 0 4px; }
+  .task-remove:hover { color: #c83e3e; }
+  @media print { .task-remove { display: none; } .task-custom-input { border-bottom: none; } }
+  .key-moment { background: #fef9e8; border: 1px solid var(--gold); border-left: 4px solid var(--gold); padding: 12px 16px; margin: 12px 0; font-size: 13px; line-height: 1.65; }
+  .key-moment strong { color: var(--navy); font-family: 'Playfair Display', serif; }
+  .footer { margin-top: 36px; padding-top: 20px; border-top: 2px solid var(--gold-light); text-align: center; font-size: 11px; color: var(--text-light); line-height: 1.6; }
+  .footer-brand { font-family: 'Playfair Display', serif; font-size: 14px; color: var(--navy); font-weight: 600; margin-bottom: 4px; letter-spacing: 0.05em; }
+  .footer-tag { color: var(--gold); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; border: none; padding: 30px 40px; max-width: 100%; }
+    .setup-panel { display: none; }
+    .stage { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="setup-panel" id="setupPanel">
+      <div class="setup-title">Deal Setup — Fill in actual dates</div>
+
+      <div class="setup-section-title">Property & Timing</div>
+      <div class="setup-grid">
+        <div class="setup-field"><label>Property Address</label><input type="text" id="f-address" placeholder="e.g. 123 Main St, Toronto"></div>
+        <div class="setup-field"><label>Acceptance Date</label><input type="date" id="f-accept-date"></div>
+        <div class="setup-field"><label>Acceptance Time</label><input type="time" id="f-accept-time"></div>
+        <div class="setup-field"><label>Closing Date</label><input type="date" id="f-closing"></div>
+      </div>
+
+      <div class="setup-section-title">Inspection Condition</div>
+      <div class="setup-grid">
+        <div class="setup-field"><label>Deadline</label><input type="date" id="f-inspect-deadline"></div>
+        <div class="setup-field"><label>Waiver/Fulfillment Day</label><input type="date" id="f-inspect-waiver"></div>
+      </div>
+
+      <div class="setup-section-title">Financing Condition</div>
+      <div class="setup-grid">
+        <div class="setup-field"><label>Deadline</label><input type="date" id="f-finance-deadline"></div>
+        <div class="setup-field"><label>Waiver/Fulfillment Day</label><input type="date" id="f-finance-waiver"></div>
+      </div>
+
+      <div class="setup-actions">
+        <button class="setup-btn" onclick="updateRoadmap()">Update Roadmap</button>
+        <button class="setup-btn secondary" onclick="saveData()">Save</button>
+        <button class="setup-btn secondary" onclick="emailRoadmap()">Email</button>
+        <button class="setup-btn secondary" onclick="window.print()">Print</button>
+        <button class="setup-btn secondary" onclick="clearData()">Clear</button>
+      </div>
+    </div>
+
+    <div class="header">
+      <div class="brand-tag">Pinnacle Listing System</div>
+      <div class="title">Your Path to Closing</div>
+      <div class="subtitle">A step-by-step roadmap from accepted offer to keys handover</div>
+      <div class="property-type-badge">Freehold Property</div>
+      <div class="property-info" id="propInfoBlock" style="display:none;">
+        <div class="property-info-row"><span class="property-info-label">Property</span><span class="property-info-value" id="d-address">—</span></div>
+        <div class="property-info-row"><span class="property-info-label">Accepted</span><span class="property-info-value" id="d-accept-info">—</span></div>
+        <div class="property-info-row"><span class="property-info-label">Closing</span><span class="property-info-value" id="d-closing-info">—</span></div>
+      </div>
+    </div>
+
+    <div class="intro">Congratulations on accepting an offer. Over the next few weeks, you'll move through a clear sequence of steps. Most happen behind the scenes — your lawyer, my team, and the buyer's side handle the details. This roadmap shows you what's happening and when. Use the checkboxes to track your progress.</div>
+
+    <!-- ACCEPTANCE DAY -->
+    <div class="stage" data-group="accept">
+      <div class="stage-header"><span class="stage-day">Acceptance</span><span class="stage-title">Acceptance Day</span><span class="stage-date" id="d-accept">—</span></div>
+      <div class="task-group-label" data-cat="accept-agent"><span class="label-text">Your Agent Handles</span><button class="add-item-btn" onclick="addItem('accept-agent')">+ Add item</button></div>
+      <div data-cat="accept-agent">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Sends deposit instructions to buyer's agent</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Confirms deposit received in brokerage trust account</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Sends signed Agreement of Purchase and Sale to your lawyer</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Updates MLS status to "Sold Conditional"</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Calendars all condition deadlines and shares with you</div></div>
+      </div>
+      <div class="task-group-label" data-cat="accept-todo"><span class="label-text">Your To-Do</span><button class="add-item-btn" onclick="addItem('accept-todo')">+ Add item</button></div>
+      <div data-cat="accept-todo">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Confirm receipt of all signed documents</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Save your lawyer's contact information</div></div>
+      </div>
+    </div>
+
+    <!-- CONDITIONAL PERIOD -->
+    <div class="stage">
+      <div class="stage-header"><span class="stage-day">Conditional</span><span class="stage-title">Conditional Period</span><span class="stage-date" id="d-conditional">—</span></div>
+      <div class="task-group-label" data-cat="cond-inspect"><span class="label-text">Home Inspection — deadline <span class="date-inline" id="d-inspect-deadline">—</span> · waiver/fulfillment <span class="date-inline" id="d-inspect-waiver">—</span></span><button class="add-item-btn" onclick="addItem('cond-inspect')">+ Add item</button></div>
+      <div data-cat="cond-inspect">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Coordinate with your agent for inspection access</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Leave the property during inspection (2–3 hours typical)</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Wait for buyer's notice — waive or request remedy</div></div>
+      </div>
+      <div class="task-group-label" data-cat="cond-finance"><span class="label-text">Buyer's Financing — deadline <span class="date-inline" id="d-finance-deadline">—</span> · waiver/fulfillment <span class="date-inline" id="d-finance-waiver">—</span></span><button class="add-item-btn" onclick="addItem('cond-finance')">+ Add item</button></div>
+      <div data-cat="cond-finance">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Provide property documents to buyer's lender if requested</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Coordinate appraiser access if needed</div></div>
+      </div>
+      <div class="key-moment"><strong>What to watch for:</strong> If the buyer raises concerns from the inspection, you have the right to remedy, credit, or decline. Your agent will walk you through any response needed.</div>
+    </div>
+
+    <!-- WAIVER DAY -->
+    <div class="stage">
+      <div class="stage-header"><span class="stage-day">Firm Day</span><span class="stage-title">Waiver Day — The Deal Becomes Firm</span><span class="stage-date" id="d-waiver">—</span></div>
+      <div class="task-group-label" data-cat="waiver-actions"><span class="label-text">What Happens</span><button class="add-item-btn" onclick="addItem('waiver-actions')">+ Add item</button></div>
+      <div data-cat="waiver-actions">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Buyer signs Waiver (OREA Form 123), or Notice of Fulfillment (Form 124) for each condition. Or deletes the condition (Form 120).</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Waiver must be delivered before 6 p.m. deadline</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Your agent confirms waiver received with you and your lawyer</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">MLS status updated to "Sold" (firm)</div></div>
+      </div>
+      <div class="key-moment"><strong>Celebrate this moment.</strong> Once all conditions are waived, your home is officially sold. The buyer can no longer walk away without forfeiting their deposit.</div>
+    </div>
+
+    <!-- PREPARING FOR CLOSING -->
+    <div class="stage">
+      <div class="stage-header"><span class="stage-day">Pre-Closing</span><span class="stage-title">Preparing for Closing</span><span class="stage-date" id="d-prep">—</span></div>
+      <div class="task-group-label" data-cat="prep-legal"><span class="label-text">Legal & Financial</span><button class="add-item-btn" onclick="addItem('prep-legal')">+ Add item</button></div>
+      <div data-cat="prep-legal">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Contact your lawyer to begin closing preparations</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Notify your mortgage lender about discharge</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Confirm your lawyer has trust account details for receiving funds</div></div>
+      </div>
+      <div class="task-group-label" data-cat="prep-utilities"><span class="label-text">Utilities & Services</span><button class="add-item-btn" onclick="addItem('prep-utilities')">+ Add item</button></div>
+      <div data-cat="prep-utilities">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Notify hydro/electric provider of move-out date</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Notify gas company of move-out date</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Cancel or transfer water/sewer account</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Cancel or transfer internet, cable, phone</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Cancel or transfer home insurance</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Cancel security/alarm monitoring</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Cancel lawn care, pool service, or other contractors</div></div>
+      </div>
+      <div class="task-group-label" data-cat="prep-moving"><span class="label-text">Moving Logistics</span><button class="add-item-btn" onclick="addItem('prep-moving')">+ Add item</button></div>
+      <div data-cat="prep-moving">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Book movers (recommended 4+ weeks in advance)</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Begin packing non-essential items</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Arrange storage if needed between move dates</div></div>
+      </div>
+      <div class="task-group-label" data-cat="prep-address"><span class="label-text">Address Updates</span><button class="add-item-btn" onclick="addItem('prep-address')">+ Add item</button></div>
+      <div data-cat="prep-address">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Set up mail forwarding with Canada Post</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Update address with CRA</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Update address with banks and credit cards</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Update driver's licence and vehicle registration</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Update OHIP / health card</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Update employer payroll and HR records</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Update subscriptions and online accounts</div></div>
+      </div>
+      <div class="task-group-label" data-cat="prep-visits"><span class="label-text">Buyer Pre-Closing Visits</span><button class="add-item-btn" onclick="addItem('prep-visits')">+ Add item</button></div>
+      <div data-cat="prep-visits">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Accommodate up to 2 pre-closing visits (1 hour each, 24-hour notice)</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Visits are for measurements and contractor quotes — not re-inspection</div></div>
+      </div>
+    </div>
+
+    <!-- FINAL WEEK -->
+    <div class="stage">
+      <div class="stage-header"><span class="stage-day">Final Week</span><span class="stage-title">Last Preparations</span><span class="stage-date" id="d-final">—</span></div>
+      <div class="task-group-label" data-cat="final-property"><span class="label-text">Property Preparation</span><button class="add-item-btn" onclick="addItem('final-property')">+ Add item</button></div>
+      <div data-cat="final-property">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Remove all personal belongings and chattels not included</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Remove all debris from garage, shed, attic, basement</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Clean property — broom-swept condition</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Patch nail holes, touch up paint if needed (optional)</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Take final meter readings (hydro, gas, water)</div></div>
+      </div>
+      <div class="task-group-label" data-cat="final-keys"><span class="label-text">Keys & Access</span><button class="add-item-btn" onclick="addItem('final-keys')">+ Add item</button></div>
+      <div data-cat="final-keys">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Gather all house keys (including spare copies)</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Gather garage door remotes and any keypad codes</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Gather mail keys, gate keys, shed keys</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Gather appliance manuals and warranties</div></div>
+      </div>
+      <div class="task-group-label" data-cat="final-docs"><span class="label-text">Closing Documents</span><button class="add-item-btn" onclick="addItem('final-docs')">+ Add item</button></div>
+      <div data-cat="final-docs">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Sign closing documents at lawyer's office (1–3 days before closing)</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Review statement of adjustments with your lawyer</div></div>
+      </div>
+    </div>
+
+    <!-- CLOSING DAY -->
+    <div class="stage">
+      <div class="stage-header"><span class="stage-day">Closing</span><span class="stage-title">Closing Day</span><span class="stage-date" id="d-closing">—</span></div>
+      <div class="task-group-label" data-cat="closing-actions"><span class="label-text">What Happens</span><button class="add-item-btn" onclick="addItem('closing-actions')">+ Add item</button></div>
+      <div data-cat="closing-actions">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Buyer's lawyer transfers funds to your lawyer's trust account</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Your mortgage is paid out from sale proceeds</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Title officially transfers to the buyer at Land Registry</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Keys delivered to buyer (typically through your lawyer)</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">You receive net proceeds (same day or next business day)</div></div>
+      </div>
+      <div class="key-moment"><strong>Congratulations.</strong> Your home is officially sold. You'll receive your proceeds via wire transfer or certified cheque from your lawyer, less mortgage payout, legal fees, and any adjustments.</div>
+    </div>
+
+    <!-- POST-CLOSING -->
+    <div class="stage">
+      <div class="stage-header"><span class="stage-day">After Closing</span><span class="stage-title">Warranty Window</span><span class="stage-date" id="d-warranty">—</span></div>
+      <div class="task-group-label" data-cat="post-stay"><span class="label-text">Stay Reachable</span><button class="add-item-btn" onclick="addItem('post-stay')">+ Add item</button></div>
+      <div data-cat="post-stay">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Be reachable by phone for any chattels defect notice from buyer</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Per your Agreement: chattels warranty expires 48 hours after closing</div></div>
+      </div>
+      <div class="task-group-label" data-cat="post-final"><span class="label-text">Final Items</span><button class="add-item-btn" onclick="addItem('post-final')">+ Add item</button></div>
+      <div data-cat="post-final">
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Save closing documents for tax purposes (principal residence exemption)</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Update voter registration and other government records</div></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-brand">Peter Luo, Broker</div>
+      <div class="footer-tag">Prepare · Market · Negotiate</div>
+      <div>RE/MAX Realtron Realty Inc., Brokerage &nbsp;|&nbsp; SRS, MCNE, FRI</div>
+      <div>647-824-3718 &nbsp;|&nbsp; peterluo@peterluo.com &nbsp;|&nbsp; peterluo.homes</div>
+    </div>
+  </div>
+
+<script>
+  const STORAGE_KEY = 'pinnacle_seller_roadmap_freehold_v2';
+  const FIELDS = ['address','accept-date','accept-time','closing','inspect-deadline','inspect-waiver','finance-deadline','finance-waiver'];
+
+  function fmtDate(s){ if(!s) return '—'; const d=new Date(s+'T12:00:00'); return d.toLocaleDateString('en-CA',{weekday:'long',year:'numeric',month:'long',day:'numeric'}); }
+  function fmtShort(s){ if(!s) return '—'; const d=new Date(s+'T12:00:00'); return d.toLocaleDateString('en-CA',{month:'short',day:'numeric',year:'numeric'}); }
+  function fmtTime(t){ if(!t) return ''; const [h,m]=t.split(':'); let H=parseInt(h,10); const ap=H>=12?'PM':'AM'; H=H%12||12; return ' at '+H+':'+m+' '+ap; }
+  function addDays(s,n){ if(!s) return ''; const d=new Date(s+'T12:00:00'); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); }
+
+  function updateRoadmap(){
+    const v = id => document.getElementById('f-'+id).value;
+    const accept=v('accept-date'), acceptTime=v('accept-time'), closing=v('closing');
+    const inspectDl=v('inspect-deadline'), inspectWv=v('inspect-waiver');
+    const financeDl=v('finance-deadline'), financeWv=v('finance-waiver');
+    const address=v('address');
+
+    if(address || accept || closing){
+      document.getElementById('propInfoBlock').style.display='block';
+      document.getElementById('d-address').textContent=address||'—';
+      document.getElementById('d-accept-info').textContent=fmtDate(accept)+fmtTime(acceptTime);
+      document.getElementById('d-closing-info').textContent=fmtDate(closing);
+    }
+
+    document.getElementById('d-accept').textContent=fmtDate(accept)+fmtTime(acceptTime);
+    document.getElementById('d-inspect-deadline').textContent=fmtShort(inspectDl);
+    document.getElementById('d-inspect-waiver').textContent=fmtShort(inspectWv);
+    document.getElementById('d-finance-deadline').textContent=fmtShort(financeDl);
+    document.getElementById('d-finance-waiver').textContent=fmtShort(financeWv);
+
+    // The last waiver date among all conditions = firm day
+    const allWaivers=[inspectWv, financeWv].filter(x=>x).sort();
+    const lastWv = allWaivers.length ? allWaivers[allWaivers.length-1] : '';
+    document.getElementById('d-waiver').textContent = lastWv ? fmtDate(lastWv)+' by 6 p.m.' : '—';
+
+    document.getElementById('d-closing').textContent=fmtDate(closing);
+
+    if(accept && lastWv) document.getElementById('d-conditional').textContent=fmtShort(accept)+' → '+fmtShort(lastWv);
+
+    if(lastWv && closing){
+      const finalStart=addDays(closing,-7);
+      document.getElementById('d-prep').textContent=fmtShort(addDays(lastWv,1))+' → '+fmtShort(addDays(finalStart,-1));
+      document.getElementById('d-final').textContent=fmtShort(finalStart)+' → '+fmtShort(addDays(closing,-1));
+    }
+    if(closing) document.getElementById('d-warranty').textContent=fmtShort(closing)+' → '+fmtShort(addDays(closing,2));
+  }
+
+  function addItem(cat){
+    const container = document.querySelector('[data-cat="'+cat+'"]:not(.task-group-label)');
+    if(!container) return;
+    const row = document.createElement('div');
+    row.className = 'task';
+    row.dataset.custom = '1';
+    row.innerHTML = '<input type="checkbox" class="task-box"><input type="text" class="task-custom-input" placeholder="Add item..." onblur="saveCustoms()"><button class="task-remove" onclick="this.parentElement.remove(); saveCustoms();" title="Remove">×</button>';
+    container.appendChild(row);
+    row.querySelector('input').focus();
+  }
+
+  function getCustoms(){
+    const out = {};
+    document.querySelectorAll('.task[data-custom="1"]').forEach(t => {
+      const container = t.parentElement;
+      const cat = container.dataset.cat;
+      const val = t.querySelector('input').value;
+      if(!out[cat]) out[cat] = [];
+      out[cat].push(val);
+    });
+    return out;
+  }
+
+  function saveCustoms(){
+    const data = loadRaw() || {};
+    data.customs = getCustoms();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function restoreCustoms(customs){
+    if(!customs) return;
+    Object.keys(customs).forEach(cat => {
+      const container = document.querySelector('[data-cat="'+cat+'"]:not(.task-group-label)');
+      if(!container) return;
+      customs[cat].forEach(val => {
+        const row = document.createElement('div');
+        row.className = 'task';
+        row.dataset.custom = '1';
+        row.innerHTML = '<input type="checkbox" class="task-box"><input type="text" class="task-custom-input" value="'+(val||'').replace(/"/g,'&quot;')+'" placeholder="Add item..." onblur="saveCustoms()"><button class="task-remove" onclick="this.parentElement.remove(); saveCustoms();" title="Remove">×</button>';
+        container.appendChild(row);
+      });
+    });
+  }
+
+  function saveData(){
+    const data = {};
+    FIELDS.forEach(k => data[k] = document.getElementById('f-'+k).value);
+    data.customs = getCustoms();
+    data.checks = getCheckStates();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    alert('Saved.');
+  }
+
+  function loadRaw(){
+    const r = localStorage.getItem(STORAGE_KEY);
+    if(!r) return null;
+    try { return JSON.parse(r); } catch(e) { return null; }
+  }
+
+  function loadData(){
+    const d = loadRaw();
+    if(!d) return;
+    FIELDS.forEach(k => { const e = document.getElementById('f-'+k); if(e) e.value = d[k] || ''; });
+    restoreCustoms(d.customs);
+    applyCheckStates(d.checks);
+    updateRoadmap();
+  }
+
+  function clearData(){
+    if(!confirm('Clear all dates and custom items?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    FIELDS.forEach(id => document.getElementById('f-'+id).value = '');
+    document.querySelectorAll('.task[data-custom="1"]').forEach(t => t.remove());
+    document.querySelectorAll('.task-box').forEach(b => b.checked = false);
+    document.getElementById('propInfoBlock').style.display = 'none';
+    document.querySelectorAll('.stage-date').forEach(el => el.textContent = '—');
+    document.querySelectorAll('.date-inline').forEach(el => el.textContent = '—');
+  }
+
+  // ---------- Checkbox state persistence ----------
+  function getCheckStates(){
+    // Build a stable key per checkbox using its position in the document
+    const boxes = document.querySelectorAll('.task-box');
+    const states = {};
+    boxes.forEach((b, i) => { if(b.checked) states[i] = 1; });
+    return states;
+  }
+  function applyCheckStates(states){
+    if(!states) return;
+    const boxes = document.querySelectorAll('.task-box');
+    Object.keys(states).forEach(i => { if(boxes[i]) boxes[i].checked = true; });
+  }
+  function saveChecks(){
+    const data = loadRaw() || {};
+    data.checks = getCheckStates();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+  document.addEventListener('change', function(e){
+    if(e.target.classList.contains('task-box')) saveChecks();
+  });
+
+  // ---------- Email roadmap ----------
+  function emailRoadmap(){
+    const v = id => document.getElementById('f-'+id).value;
+    const address = v('address') || '[property address]';
+    const acceptDate = v('accept-date'), acceptTime = v('accept-time');
+    const closing = v('closing');
+    const inspectDl = v('inspect-deadline'), inspectWv = v('inspect-waiver');
+    const financeDl = v('finance-deadline'), financeWv = v('finance-waiver');
+
+    let body = 'Your Path to Closing — Seller\'s Roadmap\r\n';
+    body += '=========================================\r\n\r\n';
+    body += 'Property: ' + address + '\r\n';
+    if(acceptDate) body += 'Acceptance: ' + fmtDate(acceptDate) + fmtTime(acceptTime) + '\r\n';
+    if(closing) body += 'Closing: ' + fmtDate(closing) + '\r\n';
+    body += '\r\n';
+
+    body += 'KEY DATES\r\n';
+    body += '---------\r\n';
+    if(inspectDl) body += 'Inspection deadline: ' + fmtShort(inspectDl) + (inspectWv ? '  ·  waiver/fulfillment: ' + fmtShort(inspectWv) : '') + '\r\n';
+    if(financeDl) body += 'Financing deadline: ' + fmtShort(financeDl) + (financeWv ? '  ·  waiver/fulfillment: ' + fmtShort(financeWv) : '') + '\r\n';
+    body += '\r\n';
+
+    // Walk through each stage
+    document.querySelectorAll('.stage').forEach(stage => {
+      const stageTitle = stage.querySelector('.stage-title');
+      const stageDate = stage.querySelector('.stage-date');
+      if(!stageTitle) return;
+      body += '\r\n' + stageTitle.textContent.toUpperCase() + '\r\n';
+      if(stageDate && stageDate.textContent && stageDate.textContent !== '—') {
+        body += stageDate.textContent + '\r\n';
+      }
+      body += '-'.repeat(stageTitle.textContent.length) + '\r\n';
+
+      // Find each group and its tasks
+      const children = Array.from(stage.children);
+      let currentGroup = '';
+      children.forEach(child => {
+        if(child.classList.contains('task-group-label')){
+          const labelText = child.querySelector('.label-text');
+          currentGroup = labelText ? labelText.textContent.trim() : '';
+          if(currentGroup) body += '\r\n' + currentGroup + '\r\n';
+        } else if(child.hasAttribute('data-cat')){
+          // This is a task container
+          const tasks = child.querySelectorAll('.task');
+          tasks.forEach(t => {
+            const box = t.querySelector('.task-box');
+            const txt = t.querySelector('.task-text') || t.querySelector('.task-custom-input');
+            if(!txt) return;
+            const taskText = txt.value !== undefined ? txt.value : txt.textContent;
+            if(!taskText.trim()) return;
+            const mark = box && box.checked ? '[x]' : '[ ]';
+            body += mark + ' ' + taskText.trim() + '\r\n';
+          });
+        }
+      });
+    });
+
+    body += '\r\n\r\n';
+    body += '---\r\n';
+    body += 'Peter Luo, Broker\r\n';
+    body += 'RE/MAX Realtron Realty Inc., Brokerage\r\n';
+    body += '647-824-3718  |  peterluo@peterluo.com\r\n';
+
+    const subject = 'Seller\'s Roadmap — ' + address;
+    const mailto = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+    // Some email clients have URL length limits — warn and offer copy as fallback
+    if(mailto.length > 8000){
+      if(confirm('The email is long and may not open in all email apps. Copy to clipboard instead?')){
+        navigator.clipboard.writeText('Subject: ' + subject + '\n\n' + body).then(() => alert('Copied to clipboard. Paste into a new email.'));
+        return;
+      }
+    }
+    window.location.href = mailto;
+  }
+
+
+  document.getElementById('f-accept-date').addEventListener('change', function(){
+    if(!this.value) return;
+    const d5 = addDays(this.value, 7);
+    ['inspect-deadline','finance-deadline','inspect-waiver','finance-waiver'].forEach(id => {
+      const e = document.getElementById('f-'+id);
+      if(!e.value) e.value = d5;
+    });
+  });
+
+  loadData();
+</script>
+</body>
+</html>
