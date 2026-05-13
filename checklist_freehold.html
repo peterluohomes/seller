@@ -15,13 +15,20 @@
   body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); font-size: 14px; line-height: 1.65; padding: 20px; }
   .page { max-width: 860px; margin: 0 auto; background: #fff; border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 48px 56px; }
   .setup-panel { background: var(--navy); color: #fff; padding: 20px 24px; margin-bottom: 28px; border: 2px solid var(--gold); }
-  .setup-title { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.2); }
+  .setup-title-row { display: flex; gap: 16px; align-items: center; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.2); flex-wrap: wrap; }
+  .setup-title { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
+  .setup-address { flex: 1; min-width: 200px; background: #fff; border: none; padding: 8px 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text); }
   .setup-section-title { font-size: 11px; color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.1em; margin: 16px 0 8px; padding-bottom: 4px; border-bottom: 1px dashed rgba(232,213,163,0.3); }
   .setup-section-title:first-child { margin-top: 0; }
   .setup-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+  .setup-grid-timing { grid-template-columns: 1fr 100px 1fr; }
+  .setup-grid-conds { grid-template-columns: 1fr 1fr 1fr 1fr; }
   .setup-field { display: flex; flex-direction: column; gap: 4px; }
+  .setup-field-time { max-width: 100px; }
   .setup-field label { font-size: 10px; color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
   .setup-field input { background: #fff; border: none; padding: 8px 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text); }
+  @media (max-width: 700px) { .setup-grid-conds { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .setup-grid-timing { grid-template-columns: 1fr; } .setup-field-time { max-width: 100%; } }
   .setup-actions { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
   .setup-btn { background: var(--gold); color: var(--navy); border: none; padding: 8px 16px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; }
   .setup-btn:hover { background: var(--gold-light); }
@@ -73,26 +80,24 @@
 <body>
   <div class="page">
     <div class="setup-panel" id="setupPanel">
-      <div class="setup-title">Deal Setup — Fill in actual dates</div>
+      <div class="setup-title-row">
+        <div class="setup-title">Sold to Closing</div>
+        <input type="text" id="f-address" class="setup-address" placeholder="Property address">
+      </div>
 
       <div class="setup-section-title">Property & Timing</div>
-      <div class="setup-grid">
-        <div class="setup-field"><label>Property Address</label><input type="text" id="f-address" placeholder="e.g. 123 Main St, Toronto"></div>
+      <div class="setup-grid setup-grid-timing">
         <div class="setup-field"><label>Acceptance Date</label><input type="date" id="f-accept-date"></div>
-        <div class="setup-field"><label>Acceptance Time</label><input type="time" id="f-accept-time"></div>
+        <div class="setup-field setup-field-time"><label>Time</label><input type="time" id="f-accept-time"></div>
         <div class="setup-field"><label>Closing Date</label><input type="date" id="f-closing"></div>
       </div>
 
-      <div class="setup-section-title">Inspection Condition</div>
-      <div class="setup-grid">
-        <div class="setup-field"><label>Deadline</label><input type="date" id="f-inspect-deadline"></div>
-        <div class="setup-field"><label>Waiver/Fulfillment Day</label><input type="date" id="f-inspect-waiver"></div>
-      </div>
-
-      <div class="setup-section-title">Financing Condition</div>
-      <div class="setup-grid">
-        <div class="setup-field"><label>Deadline</label><input type="date" id="f-finance-deadline"></div>
-        <div class="setup-field"><label>Waiver/Fulfillment Day</label><input type="date" id="f-finance-waiver"></div>
+      <div class="setup-section-title">Conditions</div>
+      <div class="setup-grid setup-grid-conds">
+        <div class="setup-field"><label>Inspection Deadline</label><input type="date" id="f-inspect-deadline"></div>
+        <div class="setup-field"><label>Inspection Waiver</label><input type="date" id="f-inspect-waiver"></div>
+        <div class="setup-field"><label>Financing Deadline</label><input type="date" id="f-finance-deadline"></div>
+        <div class="setup-field"><label>Financing Waiver</label><input type="date" id="f-finance-waiver"></div>
       </div>
 
       <div class="setup-actions">
@@ -252,8 +257,8 @@
       <div class="stage-header"><span class="stage-day">After Closing</span><span class="stage-title">Warranty Window</span><span class="stage-date" id="d-warranty">—</span></div>
       <div class="task-group-label" data-cat="post-stay"><span class="label-text">Stay Reachable</span><button class="add-item-btn" onclick="addItem('post-stay')">+ Add item</button></div>
       <div data-cat="post-stay">
-        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Be reachable by phone for any chattels defect notice from buyer</div></div>
-        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Per your Agreement: chattels warranty expires 48 hours after closing</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Be reachable by phone for any defect notice from buyer</div></div>
+        <div class="task"><input type="checkbox" class="task-box"><div class="task-text">Warranty period is as negotiated in the Agreement of Purchase and Sale (e.g. chattels, mechanical systems, illegal use, hidden defects, insurance claims — each may have its own expiry)</div></div>
       </div>
       <div class="task-group-label" data-cat="post-final"><span class="label-text">Final Items</span><button class="add-item-btn" onclick="addItem('post-final')">+ Add item</button></div>
       <div data-cat="post-final">
@@ -313,7 +318,7 @@
       document.getElementById('d-prep').textContent=fmtShort(addDays(lastWv,1))+' → '+fmtShort(addDays(finalStart,-1));
       document.getElementById('d-final').textContent=fmtShort(finalStart)+' → '+fmtShort(addDays(closing,-1));
     }
-    if(closing) document.getElementById('d-warranty').textContent=fmtShort(closing)+' → '+fmtShort(addDays(closing,2));
+    if(closing) document.getElementById('d-warranty').textContent = 'After ' + fmtShort(closing);
   }
 
   function addItem(cat){
