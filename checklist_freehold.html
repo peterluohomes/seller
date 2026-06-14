@@ -34,9 +34,11 @@
     body { padding: 10px; }
     .page { padding: 24px 16px; }
     .setup-panel { padding: 16px; }
+    .setup-actions { gap: 6px; }
+    .setup-btn { padding: 8px 10px; font-size: 11px; letter-spacing: 0.03em; }
   }
-  .setup-actions { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
-  .setup-btn { background: var(--gold); color: var(--navy); border: none; padding: 8px 16px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; }
+  .setup-actions { margin-top: 16px; display: flex; gap: 8px; flex-wrap: nowrap; }
+  .setup-btn { background: var(--gold); color: var(--navy); border: none; padding: 8px 16px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; white-space: nowrap; }
   .setup-btn:hover { background: var(--gold-light); }
   .setup-btn.secondary { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
   .setup-btn.secondary:hover { background: rgba(201,168,76,0.15); }
@@ -96,7 +98,6 @@
         <input type="text" id="f-address" class="setup-address" placeholder="Property address">
       </div>
 
-      <div class="setup-section-title">Property & Timing</div>
       <div class="setup-grid setup-grid-timing">
         <div class="setup-field"><label>Acceptance Date</label><input type="date" id="f-accept-date"></div>
         <div class="setup-field setup-field-time"><label>Time</label><input type="time" id="f-accept-time"></div>
@@ -114,15 +115,11 @@
         <button class="setup-btn" onclick="updateRoadmap()">Update Roadmap</button>
         <button class="setup-btn secondary" onclick="saveData()">Save</button>
         <button class="setup-btn secondary" onclick="emailRoadmap()">Email</button>
-        <button class="setup-btn secondary" onclick="window.print()">Print</button>
         <button class="setup-btn secondary" onclick="clearData()">Clear</button>
       </div>
     </div>
 
     <div class="header">
-      <div class="brand-tag">Pinnacle Listing System</div>
-      <div class="title">Your Path to Closing</div>
-      <div class="subtitle">A step-by-step roadmap from accepted offer to keys handover</div>
       <div class="property-type-badge">Freehold Property</div>
       <div class="property-info" id="propInfoBlock" style="display:none;">
         <div class="property-info-row"><span class="property-info-label">Property</span><span class="property-info-value" id="d-address">—</span></div>
