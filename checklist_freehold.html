@@ -15,20 +15,26 @@
   body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); font-size: 14px; line-height: 1.65; padding: 20px; }
   .page { max-width: 860px; margin: 0 auto; background: #fff; border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(0,0,0,0.08); padding: 48px 56px; }
   .setup-panel { background: var(--navy); color: #fff; padding: 20px 24px; margin-bottom: 28px; border: 2px solid var(--gold); }
-  .setup-title-row { display: flex; gap: 16px; align-items: center; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.2); flex-wrap: wrap; }
+  .setup-title-row { display: flex; gap: 12px; align-items: center; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.2); flex-wrap: nowrap; }
   .setup-title { font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
-  .setup-address { flex: 1; min-width: 200px; background: #fff; border: none; padding: 8px 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text); }
+  .setup-address { flex: 1; min-width: 0; background: #fff; border: none; padding: 8px 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text); }
+  .prop-bar { display: flex; gap: 8px; align-items: center; margin-bottom: 14px; flex-wrap: wrap; }
+  .prop-select { flex: 1; min-width: 150px; background: #fff; border: none; padding: 8px 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text); }
+  .prop-btn { padding: 8px 12px; white-space: nowrap; }
   .setup-section-title { font-size: 11px; color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.1em; margin: 16px 0 8px; padding-bottom: 4px; border-bottom: 1px dashed rgba(232,213,163,0.3); }
   .setup-section-title:first-child { margin-top: 0; }
   .setup-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
-  .setup-grid-timing { grid-template-columns: 1fr 100px 1fr; }
-  .setup-grid-conds { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .setup-grid-timing { grid-template-columns: 1fr 74px 1fr; }
+  .setup-grid-conds { grid-template-columns: 1fr 1fr; }
   .setup-field { display: flex; flex-direction: column; gap: 4px; }
-  .setup-field-time { max-width: 100px; }
+  .setup-field-time { max-width: 74px; }
   .setup-field label { font-size: 10px; color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
   .setup-field input { background: #fff; border: none; padding: 8px 10px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text); }
-  @media (max-width: 700px) { .setup-grid-conds { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 600px) { .setup-grid-timing { grid-template-columns: 1fr; } .setup-field-time { max-width: 100%; } }
+  @media (max-width: 600px) {
+    body { padding: 10px; }
+    .page { padding: 24px 16px; }
+    .setup-panel { padding: 16px; }
+  }
   .setup-actions { margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap; }
   .setup-btn { background: var(--gold); color: var(--navy); border: none; padding: 8px 16px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; }
   .setup-btn:hover { background: var(--gold-light); }
@@ -80,6 +86,11 @@
 <body>
   <div class="page">
     <div class="setup-panel" id="setupPanel">
+      <div class="prop-bar">
+        <select id="propSelect" class="prop-select" onchange="switchProperty(this.value)" aria-label="Select property"></select>
+        <button class="setup-btn secondary prop-btn" onclick="newProperty()">+ New</button>
+        <button class="setup-btn secondary prop-btn" onclick="deleteProperty()">Delete</button>
+      </div>
       <div class="setup-title-row">
         <div class="setup-title">Sold to Closing</div>
         <input type="text" id="f-address" class="setup-address" placeholder="Property address">
@@ -92,7 +103,6 @@
         <div class="setup-field"><label>Closing Date</label><input type="date" id="f-closing"></div>
       </div>
 
-      <div class="setup-section-title">Conditions</div>
       <div class="setup-grid setup-grid-conds">
         <div class="setup-field"><label>Inspection Deadline</label><input type="date" id="f-inspect-deadline"></div>
         <div class="setup-field"><label>Inspection Waiver</label><input type="date" id="f-inspect-waiver"></div>
@@ -276,8 +286,13 @@
   </div>
 
 <script>
-  const STORAGE_KEY = 'pinnacle_seller_roadmap_freehold_v2';
+  const STORE = 'pinnacle_seller_roadmap_freehold_v3';
+  const OLD_KEY = 'pinnacle_seller_roadmap_freehold_v2';
   const FIELDS = ['address','accept-date','accept-time','closing','inspect-deadline','inspect-waiver','finance-deadline','finance-waiver'];
+  let STATE = null;
+  function uid(){ return 'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+  function activeData(){ if(!STATE) return null; const p=STATE.props.find(x=>x.id===STATE.active); return p?p.data:null; }
+  function persist(){ if(STATE) localStorage.setItem(STORE, JSON.stringify(STATE)); }
 
   function fmtDate(s){ if(!s) return '—'; const d=new Date(s+'T12:00:00'); return d.toLocaleDateString('en-CA',{weekday:'long',year:'numeric',month:'long',day:'numeric'}); }
   function fmtShort(s){ if(!s) return '—'; const d=new Date(s+'T12:00:00'); return d.toLocaleDateString('en-CA',{month:'short',day:'numeric',year:'numeric'}); }
@@ -344,11 +359,7 @@
     return out;
   }
 
-  function saveCustoms(){
-    const data = loadRaw() || {};
-    data.customs = getCustoms();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  }
+  function saveCustoms(){ const d=activeData(); if(!d) return; d.customs=getCustoms(); persist(); }
 
   function restoreCustoms(customs){
     if(!customs) return;
@@ -365,39 +376,57 @@
     });
   }
 
-  function saveData(){
-    const data = {};
-    FIELDS.forEach(k => data[k] = document.getElementById('f-'+k).value);
-    data.customs = getCustoms();
-    data.checks = getCheckStates();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    alert('Saved.');
-  }
+  function collectCurrent(){ const d=activeData(); if(!d) return; FIELDS.forEach(k=> d[k]=document.getElementById('f-'+k).value); d.customs=getCustoms(); d.checks=getCheckStates(); }
+  function saveData(){ collectCurrent(); persist(); renderPropSelect(); alert('Saved.'); }
 
-  function loadRaw(){
-    const r = localStorage.getItem(STORAGE_KEY);
-    if(!r) return null;
-    try { return JSON.parse(r); } catch(e) { return null; }
+  function loadStore(){
+    let s=localStorage.getItem(STORE);
+    if(s){ try{ const o=JSON.parse(s); if(o&&o.props&&o.props.length) return o; }catch(e){} }
+    const old=localStorage.getItem(OLD_KEY);
+    if(old){ try{ const d=JSON.parse(old); const id=uid(); return {props:[{id:id,data:d}], active:id}; }catch(e){} }
+    return null;
   }
-
-  function loadData(){
-    const d = loadRaw();
-    if(!d) return;
-    FIELDS.forEach(k => { const e = document.getElementById('f-'+k); if(e) e.value = d[k] || ''; });
+  function propLabel(d){ return (d && d.address && d.address.trim()) ? d.address.trim() : 'Untitled property'; }
+  function renderPropSelect(){
+    const sel=document.getElementById('propSelect'); if(!sel) return;
+    sel.innerHTML='';
+    STATE.props.forEach(p=>{ const o=document.createElement('option'); o.value=p.id; o.textContent=propLabel(p.data); if(p.id===STATE.active) o.selected=true; sel.appendChild(o); });
+  }
+  function applyData(d){
+    d=d||{};
+    document.querySelectorAll('.task[data-custom="1"]').forEach(t=>t.remove());
+    document.querySelectorAll('.task-box').forEach(b=>b.checked=false);
+    document.querySelectorAll('.stage-date').forEach(el=>el.textContent='\u2014');
+    document.querySelectorAll('.date-inline').forEach(el=>el.textContent='\u2014');
+    document.getElementById('propInfoBlock').style.display='none';
+    FIELDS.forEach(k=>{ const e=document.getElementById('f-'+k); if(e) e.value=d[k]||''; });
     restoreCustoms(d.customs);
     applyCheckStates(d.checks);
     updateRoadmap();
   }
+  function switchProperty(id){ collectCurrent(); persist(); STATE.active=id; applyData(activeData()); renderPropSelect(); }
+  function newProperty(){ collectCurrent(); const id=uid(); STATE.props.push({id:id,data:{}}); STATE.active=id; persist(); renderPropSelect(); applyData({}); const a=document.getElementById('f-address'); if(a) a.focus(); }
+  function deleteProperty(){
+    if(!confirm('Delete this property and its checklist?')) return;
+    STATE.props=STATE.props.filter(p=>p.id!==STATE.active);
+    if(!STATE.props.length) STATE.props=[{id:uid(),data:{}}];
+    STATE.active=STATE.props[0].id; persist(); renderPropSelect(); applyData(activeData());
+  }
+  function loadData(){
+    STATE=loadStore();
+    if(!STATE){ const id=uid(); STATE={props:[{id:id,data:{}}],active:id}; }
+    if(!STATE.active || !STATE.props.find(p=>p.id===STATE.active)) STATE.active=STATE.props[0].id;
+    persist();
+    renderPropSelect();
+    applyData(activeData());
+    document.querySelectorAll('#setupPanel input').forEach(inp=>{ inp.addEventListener('change',()=>{ collectCurrent(); persist(); renderPropSelect(); }); });
+    document.getElementById('f-address').addEventListener('input',function(){ const d=activeData(); if(d){ d.address=this.value; const opt=document.querySelector('#propSelect option[value="'+STATE.active+'"]'); if(opt) opt.textContent=propLabel(d); } });
+  }
 
   function clearData(){
-    if(!confirm('Clear all dates and custom items?')) return;
-    localStorage.removeItem(STORAGE_KEY);
-    FIELDS.forEach(id => document.getElementById('f-'+id).value = '');
-    document.querySelectorAll('.task[data-custom="1"]').forEach(t => t.remove());
-    document.querySelectorAll('.task-box').forEach(b => b.checked = false);
-    document.getElementById('propInfoBlock').style.display = 'none';
-    document.querySelectorAll('.stage-date').forEach(el => el.textContent = '—');
-    document.querySelectorAll('.date-inline').forEach(el => el.textContent = '—');
+    if(!confirm('Clear all dates and custom items for this property?')) return;
+    const d=activeData(); if(d){ FIELDS.forEach(k=> d[k]=''); d.customs={}; d.checks={}; }
+    applyData(activeData()); persist(); renderPropSelect();
   }
 
   // ---------- Checkbox state persistence ----------
@@ -413,11 +442,7 @@
     const boxes = document.querySelectorAll('.task-box');
     Object.keys(states).forEach(i => { if(boxes[i]) boxes[i].checked = true; });
   }
-  function saveChecks(){
-    const data = loadRaw() || {};
-    data.checks = getCheckStates();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-  }
+  function saveChecks(){ const d=activeData(); if(!d) return; d.checks=getCheckStates(); persist(); }
   document.addEventListener('change', function(e){
     if(e.target.classList.contains('task-box')) saveChecks();
   });
